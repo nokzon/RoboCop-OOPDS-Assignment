@@ -5,12 +5,12 @@ using namespace std;
 
 
 int main(){
-    int userRows, userColumns;
-    cout << "Enter the number of rows -> ";   
-    cin >> userRows;   
-    cout << "Enter the number of columns -> ";
-    cin >> userColumns; 
-    printGrid(userRows, userColumns);
+    try{
+        readFiles();
+    }
+    catch (const exception &e){
+        cerr << "Error: " << e.what() << endl;
+    }
 
     return 0;
 }

@@ -1,6 +1,4 @@
-// This is just an example of how the text file will be like.
-
-M by N : 40 50
+M by N: 40 50
 steps: 300
 robots: 5
 Madbot Kidd 3 6
