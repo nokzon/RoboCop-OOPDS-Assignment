@@ -10,14 +10,15 @@ void printGrid(int &fieldRows, int &fieldCol);
 
 void readFiles(){
     string myLine, M, N;
+
     ifstream myFile("input.txt");
     getline(myFile, myLine);
 
-    if (myLine.find("M by N: ") != string::npos){
+    if (myLine.find("M by N: ") != string::npos) {
         stringstream s(myLine);
         string dummy1;
         s >> dummy1 >> dummy1 >> dummy1 >> M >> N;
-    } else{
+    } else {
         throw runtime_error("String 'M by N: ' not found!");
     }
 

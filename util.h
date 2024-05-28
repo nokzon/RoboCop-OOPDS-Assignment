@@ -6,18 +6,16 @@ using namespace std;
 
 void printGrid(int &userRows, int &userColumns);
 
-struct robotInfo {
+// information gotten after parsing the initial game text file
+struct gameInfo {
     int robotNo;        // Number of Robots
     string robotType;   // Type of robot
     string robotName;   // Name of robot 
     int row;            // robot coordinate row (ROW column)
     int column;         // robot coordinate column (row COLUMN)
-};
-
-struct battlefield {
-    int M;  // row
-    int N;  // column
-    int steps;  
+    int M;              // row 
+    int N;              // column
+    int steps;          
 };
 
 class Robot{
