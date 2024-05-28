@@ -1,6 +1,6 @@
 #include <iostream>
 #include "util.h"
-#include "util.cpp"
+#include "func.h"
 using namespace std;
 
 
