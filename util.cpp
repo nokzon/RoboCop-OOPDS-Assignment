@@ -42,7 +42,15 @@ void readFiles() {
             cout << "test: " << info.robotNo << endl;
 
             for (int i = 0; i < info.robotNo; i++) {
-                cout << "hi" << endl;
+                getline(myFile, myLine);
+                // cout << "hi" << endl;
+                string type, name;
+                string x, y;
+                stringstream ss(myLine);
+
+                ss >> type >> name >> x >> y;
+                cout << type << " " << name << " " << x << " " << y << endl;
+                // TODO: add variables into array
             }
         }
 
