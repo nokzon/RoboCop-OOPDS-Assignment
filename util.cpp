@@ -6,20 +6,19 @@
 using namespace std;
 
 // Function prototypes
-gameInfo parseGameGridInfo(const string& line);
+GameInfo parseGameGridInfo(const string& line);
 int parseStepsInfo(const string& line);
 int parseRobotCountInfo(const string& line);
 
 // to test if the returned parameters are correct
-void printGameInfo(const gameInfo& info);
+void printGameInfo(const GameInfo& info);
 
-// readFiles function, it reads the content from input.txt and takes in the needed contents
-void readFiles() {
-    // gameInfo object to store the parsed information
-    gameInfo info;
+// Function that reads tne input file and parses the information
+GameInfo readFile(const string& filename) {
 
     // Read files input.txt
     ifstream myFile("input.txt");
+    GameInfo info;  // gameInfo object to store the parsed information
     string myLine;
 
     if (!myFile) {
@@ -39,44 +38,23 @@ void readFiles() {
         // Checks for second line for keywords using stringstream
         if (myLine.find("Robots: ") != string::npos) {
             info.robotCount = parseRobotCountInfo(myLine);
+            info.robots = new Robot[info.robotCount];   // Allocate memory for robots
 
-            cout << "test: " << info.robotCount << endl;
-
-            for (int i = 0; i < info.robotCount; i++) {
+            for (int i = 0; i < info.robotCount; ++i) {
                 getline(myFile, myLine);
-                // cout << "hi" << endl;
-                string type, name;
-                string x, y;
-                stringstream ss(myLine);
-
-                ss >> type >> name >> x >> y;
-                cout << type << " " << name << " " << x << " " << y << endl;
-                // TODO: add variables into array
+                info.robots[i] = parseRobotInfo(myLine);
             }
         }
-
-        
-
-        // Skip empty lines or lines that don't contain relevant information
-        // if (myLine.find_firstCountt_of(' ') == string::npos) {
-        //     continue; // Skip empty lines
-        // }
-        // else {
-        //     cerr << "Error: Unrecognized line in input file: " << myLine << endl;
-        // }
     }
-
-    // Print the parsed information to verify it
-    printGameInfo(info);
-
     // Close file to prevent wasting memory resources
     myFile.close();
+    return info;
 }
 
 
 // Parse the grid information from the first line of the text file
-gameInfo parseGameGridInfo(const string& line) {
-    gameInfo info;
+GameInfo parseGameGridInfo(const string& line) {
+    GameInfo info;
 
     stringstream s(line);
     string dummy;
@@ -98,9 +76,9 @@ int parseRoboCountInfo(const string& line) {
 }
 
 // Parse the information of each robot
-robotInfo parseRobotInfo(const string& line) {
+RobotInfo parseRobotInfo(const string& line) {
     stringstream s(line);
-    robotInfo robot;
+    RobotInfo robot;
     s >> robot.type >> robot.name >> robot.positionX >> robot.positionY;
     return robot;
 }
@@ -174,7 +152,7 @@ void printGrid(int &fieldRows, int &fieldCol) {
 }
 
 // Function to print the contents of a gameInfo object
-void printGameInfo(const gameInfo& info) {
+void printGameInfo(const GameInfo& info) {
     cout << "Grid Dimensions: " << info.M << " by " << info.N << endl;
     cout << "Steps: " << info.steps << endl;
     cout << "Number of Robots: " << info.robotCount << endl;
