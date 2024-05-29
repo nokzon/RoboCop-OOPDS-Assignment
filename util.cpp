@@ -9,9 +9,11 @@ using namespace std;
 GameInfo parseGameGridInfo(const string& line);
 int parseStepsInfo(const string& line);
 int parseRobotCountInfo(const string& line);
-
-// to test if the returned parameters are correct
-void printGameInfo(const GameInfo& info);
+RobotInfo parseRobotInfo(const string& line);
+void addRobot(GameInfo &info, const RobotInfo &robot);
+GameInfo readFile(const string &filename);
+void printGameInfo(const GameInfo &info);
+void printGrid(int fieldRows, int fieldCol);
 
 // Function that reads tne input file and parses the information
 GameInfo readFile(const string& filename) {
@@ -23,7 +25,7 @@ GameInfo readFile(const string& filename) {
 
     if (!myFile) {
         cerr << "Error: CouldCountt open input file" << endl;
-        return;
+        exit(1);
     }
 
     while (getline(myFile, myLine)) {
@@ -38,7 +40,7 @@ GameInfo readFile(const string& filename) {
         // Checks for second line for keywords using stringstream
         if (myLine.find("Robots: ") != string::npos) {
             info.robotCount = parseRobotCountInfo(myLine);
-            info.robots = new Robot[info.robotCount];   // Allocate memory for robots
+            info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots
 
             for (int i = 0; i < info.robotCount; ++i) {
                 getline(myFile, myLine);

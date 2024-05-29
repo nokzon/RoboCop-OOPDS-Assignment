@@ -6,7 +6,7 @@
 using namespace std;
 
 // stuct solely to store robot details
-struct robotInfo {
+struct RobotInfo {
     string type;
     string name;
     int positionX;
@@ -14,20 +14,23 @@ struct robotInfo {
 };
 
 // information gotten after parsing the initial game text file
-struct gameInfo {
+struct GameInfo {
     int M;              // row 
     int N;              // column
     int steps;
     int robotCount;     // Number of Robots  
-    Robot* robot;       // Pointer to array for robot info        
+    RobotInfo* robots;       // Pointer to array for robot info        
 };
 
-void readFiles();
-gameInfo parseGameGridInfo(const string& line);
+// Function prototypes
+GameInfo parseGameGridInfo(const string& line);
 int parseStepsInfo(const string& line);
-int parseRobotNoInfo(const string& line);
-void printGrid(int &userRows, int &userColumns);
-void printGameInfo(const gameInfo& info);
+int parseRobotCountInfo(const string& line);
+RobotInfo parseRobotInfo(const string& line);
+void addRobot(GameInfo &info, const RobotInfo &robot);
+GameInfo readFile(const string &filename);
+void printGameInfo(const GameInfo &info);
+void printGrid(int fieldRows, int fieldCol);
 
 class Robot{
 public:
