@@ -5,125 +5,146 @@
 #include <sstream>
 using namespace std;
 
-// Function prototype
-void printGrid(int &fieldRows, int &fieldCol);
+// Function prototypes
+gameInfo parseGameGridInfo(const string& line);
+int parseStepsInfo(const string& line);
+int parseRobotNoInfo(const string& line);
+void printGameInfo(const gameInfo& info);
 
 // readFiles function, it reads the content from input.txt and takes in the needed contents
-void readFiles(){
-
-    // Declare variables needed
-    string myLine, M, N, steps, robots;
+void readFiles() {
+    // gameInfo object to store the parsed information
+    gameInfo info;
 
     // Read files input.txt
     ifstream myFile("input.txt");
+    string myLine;
 
-    while(getline(myFile, myLine)){
+    if (!myFile) {
+        cerr << "Error: Could not open input file" << endl;
+        return;
+    }
+
+    while (getline(myFile, myLine)) {
         // Checks the first line for keywords using stringstream
-        if (myLine.find("M by N: ") != string::npos){
-            stringstream s(myLine);
-            string dummy1;
-            s >> dummy1 >> dummy1 >> dummy1 >> M >> N;
-            cout << M << " " << N << endl;
+        if (myLine.find("M by N: ") != string::npos) {
+            info = parseGameGridInfo(myLine);
         }
-
-        // Checks for second line for keywords using stringstream 
-        else if (myLine.find("Steps: ") != string::npos){
-            stringstream s(myLine);
-            string dummy2;
-            s >> dummy2 >> steps;
-            cout << steps << endl;
-        } 
-
-        // Checks for second line for keywords using stringstream 
-        else if (myLine.find("Robots: ") != string::npos){
-            stringstream s(myLine);
-            string dummy3;
-            s >> dummy3 >> robots;
-            cout << robots << endl;
-        } 
-
-        // Error handling
+        // Checks for second line for keywords using stringstream
+        else if (myLine.find("Steps: ") != string::npos) {
+            info.steps = parseStepsInfo(myLine);
+        }
+        // Checks for second line for keywords using stringstream
+        else if (myLine.find("Robots: ") != string::npos) {
+            info.robotNo = parseRobotNoInfo(myLine);
+        }
+        // Skip empty lines or lines that don't contain relevant information
+        else if (myLine.find_first_not_of(' ') == string::npos) {
+            continue; // Skip empty lines
+        }
         else {
-            throw runtime_error("String not found!");
+            cerr << "Warning: Unrecognized line in input file: " << myLine << endl;
         }
     }
 
-    // Turn string into integer
-    int strM = stoi(M);
-    int strN = stoi(N);
-    int strSteps = stoi(steps);
-
-    // Call functions
-    printGrid(strM, strN);
-    cout << "Steps: " << strSteps;
+    // Print the parsed information to verify it
+    printGameInfo(info);
 
     // Close file to prevent wasting memory resources
     myFile.close();
 }
 
-// printing grid function
-void printGrid(int &fieldRows, int &fieldCol){
-    cout<<endl;
-    cout<<" ";
-    int i=1,j;
+// Parse the grid information from the first line of the text file
+gameInfo parseGameGridInfo(const string& line) {
+    gameInfo info;
+
+    stringstream s(line);
+    string dummy;
+    s >> dummy >> dummy >> dummy >> info.M >> info.N;
+
+    return info;
+}
+
+// Parse the number of steps from the input line
+int parseStepsInfo(const string& line) {
+    return stoi(line.substr(7)); // Extract the number of steps from the line
+}
+
+// Parse the number of robots from the input line
+int parseRobotNoInfo(const string& line) {
+    return stoi(line.substr(8)); // Extract the number of robots from the line
+}
+
+// Printing grid function
+void printGrid(int &fieldRows, int &fieldCol) {
+    cout << endl;
+    cout << " ";
+    int i = 1, j;
 
     // Loop that outputs top row of column numbers
-    for(j = 0; j <= 4*fieldCol; j++){
-        if(j%4==2){
-            cout<<i++;
+    for (j = 0; j <= 4 * fieldCol; j++) {
+        if (j % 4 == 2) {
+            cout << i++;
         }
-        else{
-            cout<<" ";
+        else {
+            cout << " ";
         }
     }
-    cout<<endl;
+    cout << endl;
 
     // Loop to output the entire grid
-    for(i = 0; i <= 2*fieldRows; i++){
+    for (i = 0; i <= 2 * fieldRows; i++) {
         // Print grid numbers on the left side
-        if(i%2!=0){
+        if (i % 2 != 0) {
             cout << (i / 2) + 1;
         }
-        else{
+        else {
             cout << " ";
         }
 
         // Loop to print all rows of the grid
-        for(j = 0; j <= 2*fieldCol; j++){
-            if(i%2==0){
-                if(j==0){
-                    cout<<" ";
+        for (j = 0; j <= 2 * fieldCol; j++) {
+            if (i % 2 == 0) {
+                if (j == 0) {
+                    cout << " ";
                 }
-                if(j%2==0){
-                    cout<<" ";
+                if (j % 2 == 0) {
+                    cout << " ";
                 }
-                else{
-                    cout<<"---";
+                else {
+                    cout << "---";
                 }
             }
-            else{
-                if(j%2==0)
-                    cout<<"|";
-                else cout<<"   ";
+            else {
+                if (j % 2 == 0)
+                    cout << "|";
+                else cout << "   ";
             }
         }
 
         // Print row numbers on the right side
-        if(i%2!=0){
-            cout << (i/2) + 1;
+        if (i % 2 != 0) {
+            cout << (i / 2) + 1;
         }
         cout << endl;
     }
 
     // Outputs bottom row of the column numbers
-    cout<<" ";
-    for(j = 0, i = 1; j <= 4*fieldCol; j++){
-        if(j%4==2){
-            cout<<i++;
+    cout << " ";
+    for (j = 0, i = 1; j <= 4 * fieldCol; j++) {
+        if (j % 4 == 2) {
+            cout << i++;
         }
-        else{
-            cout<<" ";
+        else {
+            cout << " ";
         }
     }
-    cout<<endl;
+    cout << endl;
+}
+
+// Function to print the contents of a gameInfo object
+void printGameInfo(const gameInfo& info) {
+    cout << "Grid Dimensions: " << info.M << " by " << info.N << endl;
+    cout << "Steps: " << info.steps << endl;
+    cout << "Number of Robots: " << info.robotNo << endl;
 }
