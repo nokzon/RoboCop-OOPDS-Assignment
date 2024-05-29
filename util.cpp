@@ -8,8 +8,9 @@ using namespace std;
 // Function prototypes
 gameInfo parseGameGridInfo(const string& line);
 int parseStepsInfo(const string& line);
-int parseRobotNoInfo(const string& line);
-// to text if the returned parameters are correct
+int parseRobotCountInfo(const string& line);
+
+// to test if the returned parameters are correct
 void printGameInfo(const gameInfo& info);
 
 // readFiles function, it reads the content from input.txt and takes in the needed contents
@@ -22,7 +23,7 @@ void readFiles() {
     string myLine;
 
     if (!myFile) {
-        cerr << "Error: Could not open input file" << endl;
+        cerr << "Error: CouldCountt open input file" << endl;
         return;
     }
 
@@ -37,11 +38,11 @@ void readFiles() {
         }
         // Checks for second line for keywords using stringstream
         if (myLine.find("Robots: ") != string::npos) {
-            info.robotNo = parseRobotNoInfo(myLine);
+            info.robotCount = parseRobotCountInfo(myLine);
 
-            cout << "test: " << info.robotNo << endl;
+            cout << "test: " << info.robotCount << endl;
 
-            for (int i = 0; i < info.robotNo; i++) {
+            for (int i = 0; i < info.robotCount; i++) {
                 getline(myFile, myLine);
                 // cout << "hi" << endl;
                 string type, name;
@@ -57,7 +58,7 @@ void readFiles() {
         
 
         // Skip empty lines or lines that don't contain relevant information
-        // if (myLine.find_first_not_of(' ') == string::npos) {
+        // if (myLine.find_firstCountt_of(' ') == string::npos) {
         //     continue; // Skip empty lines
         // }
         // else {
@@ -72,6 +73,7 @@ void readFiles() {
     myFile.close();
 }
 
+
 // Parse the grid information from the first line of the text file
 gameInfo parseGameGridInfo(const string& line) {
     gameInfo info;
@@ -83,15 +85,26 @@ gameInfo parseGameGridInfo(const string& line) {
     return info;
 }
 
+
 // Parse the number of steps from the input line
 int parseStepsInfo(const string& line) {
     return stoi(line.substr(7)); // Extract the number of steps from the line
 }
 
+
 // Parse the number of robots from the input line
-int parseRobotNoInfo(const string& line) {
+int parseRoboCountInfo(const string& line) {
     return stoi(line.substr(8)); // Extract the number of robots from the line
 }
+
+// Parse the information of each robot
+robotInfo parseRobotInfo(const string& line) {
+    stringstream s(line);
+    robotInfo robot;
+    s >> robot.type >> robot.name >> robot.positionX >> robot.positionY;
+    return robot;
+}
+
 
 // Printing grid function
 void printGrid(int &fieldRows, int &fieldCol) {
@@ -164,5 +177,5 @@ void printGrid(int &fieldRows, int &fieldCol) {
 void printGameInfo(const gameInfo& info) {
     cout << "Grid Dimensions: " << info.M << " by " << info.N << endl;
     cout << "Steps: " << info.steps << endl;
-    cout << "Number of Robots: " << info.robotNo << endl;
+    cout << "Number of Robots: " << info.robotCount << endl;
 }
