@@ -9,6 +9,7 @@ using namespace std;
 gameInfo parseGameGridInfo(const string& line);
 int parseStepsInfo(const string& line);
 int parseRobotNoInfo(const string& line);
+// to text if the returned parameters are correct
 void printGameInfo(const gameInfo& info);
 
 // readFiles function, it reads the content from input.txt and takes in the needed contents
@@ -31,20 +32,29 @@ void readFiles() {
             info = parseGameGridInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
-        else if (myLine.find("Steps: ") != string::npos) {
+        if (myLine.find("Steps: ") != string::npos) {
             info.steps = parseStepsInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
-        else if (myLine.find("Robots: ") != string::npos) {
+        if (myLine.find("Robots: ") != string::npos) {
             info.robotNo = parseRobotNoInfo(myLine);
+
+            cout << "test: " << info.robotNo << endl;
+
+            for (int i = 0; i < info.robotNo; i++) {
+                cout << "hi" << endl;
+            }
         }
+
+        
+
         // Skip empty lines or lines that don't contain relevant information
-        else if (myLine.find_first_not_of(' ') == string::npos) {
-            continue; // Skip empty lines
-        }
-        else {
-            cerr << "Warning: Unrecognized line in input file: " << myLine << endl;
-        }
+        // if (myLine.find_first_not_of(' ') == string::npos) {
+        //     continue; // Skip empty lines
+        // }
+        // else {
+        //     cerr << "Error: Unrecognized line in input file: " << myLine << endl;
+        // }
     }
 
     // Print the parsed information to verify it
