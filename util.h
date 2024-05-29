@@ -1,10 +1,9 @@
-#include <iostream>
-#include <string>
-using namespace std;
 #ifndef UTIL_H
 #define UTIL_H
 
-void printGrid(int &userRows, int &userColumns);
+#include <iostream>
+#include <string>
+using namespace std;
 
 // information gotten after parsing the initial game text file
 struct gameInfo {
@@ -17,6 +16,13 @@ struct gameInfo {
     int N;              // column
     int steps;          
 };
+
+void readFiles();
+gameInfo parseGameGridInfo(const string& line);
+int parseStepsInfo(const string& line);
+int parseRobotNoInfo(const string& line);
+void printGrid(int &userRows, int &userColumns);
+void printGameInfo(const gameInfo& info);
 
 class Robot{
 public:
