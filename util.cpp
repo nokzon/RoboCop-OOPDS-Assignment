@@ -5,12 +5,12 @@
 #include <sstream>
 using namespace std;
 
-
 // Function prototype
 void printGrid(int &fieldRows, int &fieldCol);
 
 // readFiles function, it reads the content from input.txt and takes in the needed contents
 void readFiles(){
+
     // Declare variables needed
     string myLine, M, N, steps, robots;
 
