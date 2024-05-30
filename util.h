@@ -5,24 +5,32 @@
 #include <string>
 using namespace std;
 
-// information gotten after parsing the initial game text file
-struct gameInfo {
-    int robotNo;        // Number of Robots
-    string robotType;   // Type of robot
-    string robotName;   // Name of robot 
-    int row;            // robot coordinate row (ROW column)
-    int column;         // robot coordinate column (row COLUMN)
-    int M;              // row 
-    int N;              // column
-    int steps;          
+// stuct solely to store robot details
+struct RobotInfo {
+    string type;
+    string name;
+    int positionX;
+    int positionY;
 };
 
-void readFiles();
-gameInfo parseGameGridInfo(const string& line);
+// information gotten after parsing the initial game text file
+struct GameInfo {
+    int M;              // row 
+    int N;              // column
+    int steps;
+    int robotCount;     // Number of Robots  
+    RobotInfo* robots;  // Pointer to array for robot info        
+};
+
+// Function prototypes
+GameInfo parseGameGridInfo(const string& line);
 int parseStepsInfo(const string& line);
-int parseRobotNoInfo(const string& line);
-void printGrid(int &userRows, int &userColumns);
-void printGameInfo(const gameInfo& info);
+int parseRobotCountInfo(const string& line);
+RobotInfo parseRobotInfo(const string& line);
+void addRobot(GameInfo &info, const RobotInfo &robot);
+GameInfo readFile(const string &filename);
+void printGameInfo(const GameInfo &info);
+void printGrid(int fieldRows, int fieldCol);
 
 class Robot{
 public:

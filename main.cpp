@@ -5,13 +5,9 @@ using namespace std;
 
 
 int main(){
-
-    try{
-        readFiles();
-    }
-    catch (const exception &e){
-        cerr << "Error: " << e.what() << endl;
-    }
+    string filename = "input.txt";
+    GameInfo gameInfo = readFile(filename);
+    printGameInfo(gameInfo);    // Print the parsed information to verify it
 
     return 0;
 }
