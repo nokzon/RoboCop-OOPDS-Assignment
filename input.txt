@@ -1,6 +1,6 @@
 M by N: 40 50
 Steps: 50
-Robots: 7
+Robots: 5
 Madbot Kidd 3 6
 RoboTank Jet 12 1
 Terminator Alpha 35 20

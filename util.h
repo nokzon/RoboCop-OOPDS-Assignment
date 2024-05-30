@@ -9,8 +9,8 @@ using namespace std;
 struct RobotInfo {
     string type;
     string name;
-    int positionX;
-    int positionY;
+    string positionX;   // is a string to be able to get random, convert to int later
+    string positionY;
 };
 
 // information gotten after parsing the initial game text file
