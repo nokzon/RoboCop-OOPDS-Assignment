@@ -149,6 +149,7 @@ void printGameInfo(const GameInfo& info) {
     cout << "Steps: " << info.steps << endl;
     cout << "Number of Robots: " << info.robotCount << endl;
     for (int i = 0; i < info.robotCount; ++i) {
-        // Want to cout the robot info (think need operator overloading)
+        cout << "Robot " << (i + 1) << ": " << info.robots[i].type << " " << info.robots[i].name 
+             << " at (" << info.robots[i].positionX << ", " << info.robots[i].positionY << ")" << endl;
     }
 }
