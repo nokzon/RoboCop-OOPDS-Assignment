@@ -14,7 +14,7 @@ GameInfo readFile(const string& filename) {
     string myLine;
 
     if (!myFile) {
-        cerr << "Error: CouldCountt open input file" << endl;
+        cerr << "Error: Couldn't open input file" << endl;
         exit(1);
     }
 
@@ -30,7 +30,7 @@ GameInfo readFile(const string& filename) {
         // Checks for second line for keywords using stringstream
         if (myLine.find("Robots: ") != string::npos) {
             info.robotCount = parseRobotCountInfo(myLine);
-            info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots based on robot Count
+            // info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots based on robot Count
 
             for (int i = 0; i < info.robotCount; ++i) {
                 getline(myFile, myLine);
@@ -68,11 +68,20 @@ int parseRobotCountInfo(const string& line) {
 }
 
 // Parse the information of each robot
-RobotInfo parseRobotInfo(const string& line) {
+Robot* parseRobotInfo(const string& line) {
     stringstream s(line);
-    RobotInfo robot;
-    s >> robot.type >> robot.name >> robot.positionX >> robot.positionY;
-    return robot;
+    string type, name;
+    int row, column;
+    s >> type >> name >> row >> column;
+
+    if (type == "Madbot"){
+        return new madBot(name, row, column);
+    }
+    else if (type == "RoboTank"){
+        return new roboTank(name, row, column);
+    }
+
+    throw runtime_error("Unknown robot type!");
 }
 
 
