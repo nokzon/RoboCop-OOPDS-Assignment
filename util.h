@@ -19,7 +19,7 @@ struct GameInfo {
     int N;              // column
     int steps;
     int robotCount;     // Number of Robots  
-    RobotInfo* robots;       // Pointer to array for robot info        
+    RobotInfo* robots;  // Pointer to array for robot info        
 };
 
 // Function prototypes

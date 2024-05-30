@@ -5,16 +5,6 @@
 #include <sstream>
 using namespace std;
 
-// Function prototypes
-GameInfo parseGameGridInfo(const string& line);
-int parseStepsInfo(const string& line);
-int parseRobotCountInfo(const string& line);
-RobotInfo parseRobotInfo(const string& line);
-void addRobot(GameInfo &info, const RobotInfo &robot);
-GameInfo readFile(const string &filename);
-void printGameInfo(const GameInfo &info);
-void printGrid(int fieldRows, int fieldCol);
-
 // Function that reads tne input file and parses the information
 GameInfo readFile(const string& filename) {
 
@@ -40,7 +30,7 @@ GameInfo readFile(const string& filename) {
         // Checks for second line for keywords using stringstream
         if (myLine.find("Robots: ") != string::npos) {
             info.robotCount = parseRobotCountInfo(myLine);
-            info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots
+            info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots based on robot Count
 
             for (int i = 0; i < info.robotCount; ++i) {
                 getline(myFile, myLine);
@@ -73,7 +63,7 @@ int parseStepsInfo(const string& line) {
 
 
 // Parse the number of robots from the input line
-int parseRoboCountInfo(const string& line) {
+int parseRobotCountInfo(const string& line) {
     return stoi(line.substr(8)); // Extract the number of robots from the line
 }
 
@@ -158,4 +148,7 @@ void printGameInfo(const GameInfo& info) {
     cout << "Grid Dimensions: " << info.M << " by " << info.N << endl;
     cout << "Steps: " << info.steps << endl;
     cout << "Number of Robots: " << info.robotCount << endl;
+    for (int i = 0; i < info.robotCount; ++i) {
+        // Want to cout the robot info (think need operator overloading)
+    }
 }
