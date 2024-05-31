@@ -5,76 +5,66 @@
 #include <sstream>
 using namespace std;
 
+// Parse the information of each robot
+void RobotInfo::parseRobotInfo(const string& line) {
+    stringstream s(line);
+    s >> this->type >> this->name >> this->positionX >> this->positionY;
+}
+
 // Function that reads tne input file and parses the information
-GameInfo readFile(const string& filename) {
+void GameInfo::readFile(const string& filename) {
 
     // Read files input.txt
     ifstream myFile("input.txt");
-    GameInfo info;  // gameInfo object to store the parsed information
     string myLine;
 
     if (!myFile) {
-        cerr << "Error: CouldCountt open input file" << endl;
+        cerr << "Error: Couldn't open input file" << endl;
         exit(1);
     }
 
     while (getline(myFile, myLine)) {
         // Checks the first line for keywords using stringstream
         if (myLine.find("M by N: ") != string::npos) {
-            info = parseGameGridInfo(myLine);
+            parseGameGridInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
-        if (myLine.find("Steps: ") != string::npos) {
-            info.steps = parseStepsInfo(myLine);
+        else if (myLine.find("Steps: ") != string::npos) {
+            parseStepsInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
-        if (myLine.find("Robots: ") != string::npos) {
-            info.robotCount = parseRobotCountInfo(myLine);
-            info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots based on robot Count
+        else if (myLine.find("Robots: ") != string::npos) {
+            parseRobotCountInfo(myLine);
 
-            for (int i = 0; i < info.robotCount; ++i) {
+            this->robots = new RobotInfo[this->robotCount];   // Allocate memory for robots based on robot Count
+
+            for (int i = 0; i < this->robotCount; ++i) {
                 getline(myFile, myLine);
-                info.robots[i] = parseRobotInfo(myLine);
+                this->robots[i].parseRobotInfo(myLine);
             }
         }
     }
+
     // Close file to prevent wasting memory resources
     myFile.close();
-    return info;
 }
-
 
 // Parse the grid information from the first line of the text file
-GameInfo parseGameGridInfo(const string& line) {
-    GameInfo info;
-
+void GameInfo::parseGameGridInfo(const string& line) {
     stringstream s(line);
     string dummy;
-    s >> dummy >> dummy >> dummy >> info.M >> info.N;
-
-    return info;
+    s >> dummy >> dummy >> dummy >> this->M >> this->N;
 }
-
 
 // Parse the number of steps from the input line
-int parseStepsInfo(const string& line) {
-    return stoi(line.substr(7)); // Extract the number of steps from the line
+void GameInfo::parseStepsInfo(const string& line) {
+    this->steps = stoi(line.substr(7)); // Extract the number of steps from the line
 }
-
 
 // Parse the number of robots from the input line
-int parseRobotCountInfo(const string& line) {
-    return stoi(line.substr(8)); // Extract the number of robots from the line
+void GameInfo::parseRobotCountInfo(const string& line) {
+    this->robotCount = stoi(line.substr(8)); // Extract the number of robots from the line
 }
-
-// Parse the information of each robot
-RobotInfo parseRobotInfo(const string& line) {
-    stringstream s(line);
-    RobotInfo robot;
-    s >> robot.type >> robot.name >> robot.positionX >> robot.positionY;
-    return robot;
-}
-
 
 // Printing grid function
 void printGrid(int &fieldRows, int &fieldCol) {
@@ -144,12 +134,12 @@ void printGrid(int &fieldRows, int &fieldCol) {
 }
 
 // Function to print the contents of a gameInfo object
-void printGameInfo(const GameInfo& info) {
-    cout << "Grid Dimensions: " << info.M << " by " << info.N << endl;
-    cout << "Steps: " << info.steps << endl;
-    cout << "Number of Robots: " << info.robotCount << endl;
-    for (int i = 0; i < info.robotCount; ++i) {
-        cout << "Robot " << (i + 1) << ": " << info.robots[i].type << " " << info.robots[i].name 
-             << " at (" << info.robots[i].positionX << ", " << info.robots[i].positionY << ")" << endl;
+void GameInfo::printGameInfo() {
+    cout << "Grid Dimensions: " << this->M << " by " << this->N << endl;
+    cout << "Steps: " << this->steps << endl;
+    cout << "Number of Robots: " << this->robotCount << endl;
+    for (int i = 0; i < this->robotCount; ++i) {
+        cout << "Robot " << (i + 1) << ": " << this->robots[i].type << " " << this->robots[i].name 
+             << " at (" << this->robots[i].positionX << ", " << this->robots[i].positionY << ")" << endl;
     }
 }
