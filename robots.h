@@ -12,6 +12,7 @@ protected:
     int posY;
     int posX;
     char symbol = 'x';
+    int lives = 0;
 
 public:
     robot(const string& type, const string& name, int r, int c) 
