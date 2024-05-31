@@ -15,6 +15,7 @@ private:
     string name;
     int positionX;
     int positionY;
+};
 
 // information gotten after parsing the initial game text file
 struct gameInfo {
