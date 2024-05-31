@@ -25,6 +25,7 @@ public:
     virtual void printInfo() const = 0;
 
     // Additional common robot functionalities can be added here
+    
 };
 
 // movingRobot class inheriting robot base class
