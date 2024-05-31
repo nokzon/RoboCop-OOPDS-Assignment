@@ -1,15 +1,10 @@
 #include "util.h"
+#include "robots.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 using namespace std;
-
-// Parse the information of each robot
-void RobotInfo::parseRobotInfo(const string& line) {
-    stringstream s(line);
-    s >> this->type >> this->name >> this->positionX >> this->positionY;
-}
 
 // Function that reads tne input file and parses the information
 void GameInfo::readFile(const string& filename) {
@@ -29,25 +24,24 @@ void GameInfo::readFile(const string& filename) {
             parseGameGridInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
-        else if (myLine.find("Steps: ") != string::npos) {
+        if (myLine.find("Steps: ") != string::npos) {
             parseStepsInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
-        else if (myLine.find("Robots: ") != string::npos) {
+        if (myLine.find("Robots: ") != string::npos) {
             parseRobotCountInfo(myLine);
-
-            this->robots = new RobotInfo[this->robotCount];   // Allocate memory for robots based on robot Count
+            // info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots based on robot Count
 
             for (int i = 0; i < this->robotCount; ++i) {
                 getline(myFile, myLine);
-                this->robots[i].parseRobotInfo(myLine);
+                parseRobotInfo(myLine);
             }
         }
     }
-
     // Close file to prevent wasting memory resources
     myFile.close();
 }
+
 
 // Parse the grid information from the first line of the text file
 void GameInfo::parseGameGridInfo(const string& line) {
@@ -56,7 +50,8 @@ void GameInfo::parseGameGridInfo(const string& line) {
     s >> dummy >> dummy >> dummy >> this->M >> this->N;
 }
 
-// Parse the number of steps from the input line
+
+// Parse the number of steps from the input line    
 void GameInfo::parseStepsInfo(const string& line) {
     this->steps = stoi(line.substr(7)); // Extract the number of steps from the line
 }
@@ -66,8 +61,34 @@ void GameInfo::parseRobotCountInfo(const string& line) {
     this->robotCount = stoi(line.substr(8)); // Extract the number of robots from the line
 }
 
+// Parse the information of each robot
+robot* parseRobotInfo(const string& line) {
+    stringstream s(line);
+    string type, name;
+    int posY, posX;
+    s >> type >> name >> posY >> posX;
+
+    if (type == "Madbot"){
+        robot* r = new madBot(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type != "Madbot"){
+        robot* r = new madBot(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
+
+    else{
+        throw runtime_error("Unknown robot type!");
+    }
+}
+
+
 // Printing grid function
-void printGrid(int &fieldRows, int &fieldCol) {
+void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
+    fieldRows = this->M;
     cout << endl;
     cout << " ";
     int i = 1, j;
@@ -138,8 +159,21 @@ void GameInfo::printGameInfo() {
     cout << "Grid Dimensions: " << this->M << " by " << this->N << endl;
     cout << "Steps: " << this->steps << endl;
     cout << "Number of Robots: " << this->robotCount << endl;
-    for (int i = 0; i < this->robotCount; ++i) {
-        cout << "Robot " << (i + 1) << ": " << this->robots[i].type << " " << this->robots[i].name 
-             << " at (" << this->robots[i].positionX << ", " << this->robots[i].positionY << ")" << endl;
+
+    // Redundant stuff lol
+    // for (int i = 0; i < this->robotCount; i++){
+    //     this->robots[i]->printInfo();
+    // }
+    // for (int i = 0; i < info.robotCount; ++i) {
+    //     cout << "Robot " << (i + 1) << ": " << info.robots[i].type << " " << info.robots[i].name 
+    //          << " at (" << info.robots[i].positionX << ", " << info.robots[i].positionY << ")" << endl;
+    // }
+}
+
+// Function to delete robot objects
+void GameInfo::deleteRobots() {
+    for (int i = 0; i < this->robotCount; ++i){
+        delete this->robots[i];
     }
+    delete[] this->robots;
 }
