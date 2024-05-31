@@ -3,39 +3,46 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
+#include "robots.h"
 using namespace std;
 
-// stuct solely to store robot details
-struct RobotInfo {
+// Class that stores robot details
+class RobotInfo {
+private:
     string type;
     string name;
-    string positionX;   // is a string to be able to get random, convert to int later
-    string positionY;
+    int positionX;
+    int positionY;
+
+public:
+    friend class GameInfo;
+
+    void parseRobotInfo(const string& line);
 };
 
-// information gotten after parsing the initial game text file
-struct GameInfo {
-    int M;              // row 
-    int N;              // column
+// Class that stores the game information
+class GameInfo {
+private:
+    int M;              // Row 
+    int N;              // Column
     int steps;
-    int robotCount;     // Number of Robots  
-    RobotInfo* robots;  // Pointer to array for robot info        
+    int robotCount;
+    RobotInfo* robots;  // Pointer to array for robot info
+
+public:
+    friend RobotInfo;
+
+    void readFile(const string& filename);
+    void parseGameGridInfo(const string& line);
+    void parseStepsInfo(const string& line);
+    void parseRobotCountInfo(const string& line);
+    void printGameInfo();
 };
 
 // Function prototypes
-GameInfo parseGameGridInfo(const string& line);
-int parseStepsInfo(const string& line);
-int parseRobotCountInfo(const string& line);
-RobotInfo parseRobotInfo(const string& line);
-void addRobot(GameInfo &info, const RobotInfo &robot);
-GameInfo readFile(const string &filename);
-void printGameInfo(const GameInfo &info);
-void printGrid(int fieldRows, int fieldCol);
-
-class Robot{
-public:
-    // TODO: All the functions;
-};
+// void addRobot(GameInfo &info, const RobotInfo &robot);
 
 class MovingRobot : public Robot{
     // TODO: All the functions;
