@@ -51,14 +51,9 @@ void GameInfo::readFile(const string& filename) {
 
 // Parse the grid information from the first line of the text file
 void GameInfo::parseGameGridInfo(const string& line) {
-    int x, y;
-
     stringstream s(line);
     string dummy;
-    s >> dummy >> dummy >> dummy >> x >> y;
-
-    this->M = x;
-    this->N = y;
+    s >> dummy >> dummy >> dummy >> this->M >> this->N;
 }
 
 // Parse the number of steps from the input line
