@@ -6,11 +6,11 @@
 using namespace std;
 
 // Function that reads tne input file and parses the information
-GameInfo readFile(const string& filename) {
+gameInfo readFile(const string& filename) {
 
     // Read files input.txt
     ifstream myFile("input.txt");
-    GameInfo info;  // gameInfo object to store the parsed information
+    gameInfo info;  // gameInfo object to store the parsed information
     string myLine;
 
     if (!myFile) {
@@ -34,7 +34,7 @@ GameInfo readFile(const string& filename) {
 
             for (int i = 0; i < info.robotCount; ++i) {
                 getline(myFile, myLine);
-                info.robots[i] = parseRobotInfo(myLine);
+                parseRobotInfo(myLine);
             }
         }
     }
@@ -45,8 +45,8 @@ GameInfo readFile(const string& filename) {
 
 
 // Parse the grid information from the first line of the text file
-GameInfo parseGameGridInfo(const string& line) {
-    GameInfo info;
+gameInfo parseGameGridInfo(const string& line) {
+    gameInfo info;
 
     stringstream s(line);
     string dummy;
@@ -68,25 +68,29 @@ int parseRobotCountInfo(const string& line) {
 }
 
 // Parse the information of each robot
-Robot* parseRobotInfo(const string& line) {
+robot* parseRobotInfo(const string& line) {
     stringstream s(line);
     string type, name;
-    int row, column;
-    s >> type >> name >> row >> column;
+    int posY, posX;
+    s >> type >> name >> posY >> posX;
 
     if (type == "Madbot"){
-        return new madBot(name, row, column);
+        robot* r = new madBot(type, name, posY, posX);
+        r->printInfo();
+        return r;
     }
-    else if (type == "RoboTank"){
-        return new roboTank(name, row, column);
-    }
+    // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
 
-    throw runtime_error("Unknown robot type!");
+    else{
+        throw runtime_error("Unknown robot type!");
+    }
 }
 
 
 // Printing grid function
 void printGrid(int &fieldRows, int &fieldCol) {
+    gameInfo info;
+    fieldRows = info.M;
     cout << endl;
     cout << " ";
     int i = 1, j;
@@ -153,12 +157,15 @@ void printGrid(int &fieldRows, int &fieldCol) {
 }
 
 // Function to print the contents of a gameInfo object
-void printGameInfo(const GameInfo& info) {
+void printGameInfo(const gameInfo& info) {
     cout << "Grid Dimensions: " << info.M << " by " << info.N << endl;
     cout << "Steps: " << info.steps << endl;
     cout << "Number of Robots: " << info.robotCount << endl;
-    for (int i = 0; i < info.robotCount; ++i) {
-        cout << "Robot " << (i + 1) << ": " << info.robots[i].type << " " << info.robots[i].name 
-             << " at (" << info.robots[i].positionX << ", " << info.robots[i].positionY << ")" << endl;
+    for (int i = 0; i < info.robotCount; i++){
+        info.robots[i]->printInfo();
     }
+    // for (int i = 0; i < info.robotCount; ++i) {
+    //     cout << "Robot " << (i + 1) << ": " << info.robots[i].type << " " << info.robots[i].name 
+    //          << " at (" << info.robots[i].positionX << ", " << info.robots[i].positionY << ")" << endl;
+    // }
 }
