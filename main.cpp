@@ -6,8 +6,9 @@ using namespace std;
 
 int main(){
     string filename = "input.txt";
-    GameInfo gameInfo = readFile(filename);
-    printGameInfo(gameInfo);    // Print the parsed information to verify it
+    GameInfo gameInfo;
+    gameInfo.readFile(filename);
+    gameInfo.printGameInfo();    // Print the parsed information to verify it
 
     return 0;
 }
