@@ -79,6 +79,10 @@ robot* parseRobotInfo(const string& line) {
         r->printInfo();
         return r;
     }
+    else if (type != "Madbot"){
+        robot* r = new madBot(type, name, posY, posX);
+        r->printInfo();
+        return r;
     // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
 
     else{

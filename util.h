@@ -3,16 +3,18 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
 #include "robots.h"
 using namespace std;
 
-// stuct solely to store robot details
-// struct RobotInfo {
-//     string type;
-//     string name;
-//     string positionX;   // is a string to be able to get random, convert to int later
-//     string positionY;
-// };
+// Class that stores robot details
+class RobotInfo {
+private:
+    string type;
+    string name;
+    int positionX;
+    int positionY;
 
 // information gotten after parsing the initial game text file
 struct gameInfo {
