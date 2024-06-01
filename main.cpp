@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "util.h"
 #include "util.cpp"
 using namespace std;
@@ -13,6 +14,7 @@ int main(){
 
     Battlefield battlefield(gameInfo);
     battlefield.printBattlefield(gameInfo);
+
     // gameInfo.deleteRobots();
     
     // Moved to function deleteRobots()

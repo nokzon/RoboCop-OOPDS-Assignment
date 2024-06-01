@@ -25,7 +25,7 @@ using namespace std;
 
 // Information gotten after parsing the initial game text file
 class GameInfo {
-private:
+public:
     int M;              // row 
     int N;              // column
     int steps;

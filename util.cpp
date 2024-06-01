@@ -6,7 +6,7 @@
 #include <sstream>
 using namespace std;
 
-// Function that reads the input file and parses the information
+// Function that reads tne input file and parses the information
 void GameInfo::readFile(const string& filename) {
 
     // Read files input.txt
@@ -20,7 +20,7 @@ void GameInfo::readFile(const string& filename) {
 
     while (getline(myFile, myLine)) {
         // Checks the first line for keywords using stringstream
-        if (myLine.find("M by N: ") != string::npos) {  // npos is used to indicate that no position in the string matches the requested operation
+        if (myLine.find("M by N: ") != string::npos) {
             parseGameGridInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
@@ -86,7 +86,7 @@ robot* parseRobotInfo(const string& line) {
 }
 
 
-// // Printing grid function
+// Printing grid function
 // void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
 //     fieldRows = this->M;
 //     cout << endl;
@@ -171,9 +171,10 @@ void GameInfo::printGameInfo() {
 }
 
 // Function to delete robot objects
-// void GameInfo::deleteRobots() {
-//     for (int i = 0; i < this->robotCount; ++i){
-//         delete this->robots[i];
-//     }
-//     delete[] this->robots;
-// }
+void GameInfo::deleteRobots() {
+    for (int i = 0; i < this->robotCount; ++i){
+        delete this->robots[i];
+    }
+    delete[] this->robots;
+}
+
