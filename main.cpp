@@ -8,8 +8,9 @@ int main(){
     string filename = "input.txt";
     GameInfo gameInfo;
     gameInfo.readFile(filename);
+    gameInfo.printGrid();
     gameInfo.printGameInfo();    // Print the parsed information to verify it
-    gameInfo.deleteRobots();
+    // gameInfo.deleteRobots();
     
     // Moved to function deleteRobots()
     // for (int i = 0; i < gameInfo.robotCount; ++i){

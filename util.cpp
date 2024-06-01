@@ -38,6 +38,7 @@ void GameInfo::readFile(const string& filename) {
             }
         }
     }
+
     // Close file to prevent wasting memory resources
     myFile.close();
 }
@@ -87,8 +88,9 @@ robot* parseRobotInfo(const string& line) {
 
 
 // Printing grid function
-void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
-    fieldRows = this->M;
+void GameInfo::printGrid() {
+    int fieldRows = this->M;
+    int fieldCol = this->N;
     cout << endl;
     cout << " ";
     int i = 1, j;
@@ -171,9 +173,9 @@ void GameInfo::printGameInfo() {
 }
 
 // Function to delete robot objects
-void GameInfo::deleteRobots() {
-    for (int i = 0; i < this->robotCount; ++i){
-        delete this->robots[i];
-    }
-    delete[] this->robots;
-}
+// void GameInfo::deleteRobots() {
+//     for (int i = 0; i < this->robotCount; ++i){
+//         delete this->robots[i];
+//     }
+//     delete[] this->robots;
+// }

@@ -41,7 +41,7 @@ public:
     void parseStepsInfo(const string& line);
     void parseRobotCountInfo(const string& line);
     void printGameInfo();
-    void printGrid(int &fieldRows, int &fieldCol);
+    void printGrid();
     void deleteRobots();
 };
 
