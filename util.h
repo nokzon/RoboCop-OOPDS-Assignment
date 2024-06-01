@@ -75,18 +75,18 @@ public:
         int i, j;
         printf("    ");
 
-        for (i = 0; i < 15; i++) {
+        for (i = 0; i < gameInfo.N; i++) {
             if (i < 10) {printf("%d  ", i);}
             else if (i >= 10) {printf("%d ", i);}
         }
 
-        printf("\n\n");
+        printf("\n");
 
-        for (i = 0; i < 15; i++) {
+        for (i = 0; i < gameInfo.M; i++) {
             if (i < 10) {printf("%d   ", i);}
             else if (i >= 10) {printf("%d  ", i);}
 
-            for (j = 0; j < 15; j++)
+            for (j = 0; j < gameInfo.N; j++)
                 printf("%c  ", battlefield[i][j]);
             printf("\n");
         }

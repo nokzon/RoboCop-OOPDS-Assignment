@@ -152,7 +152,7 @@ robot* parseRobotInfo(const string& line) {
 //         }
 //     }
 //     cout << endl;
-// }
+// 
 
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
@@ -171,10 +171,10 @@ void GameInfo::printGameInfo() {
 }
 
 // Function to delete robot objects
-void GameInfo::deleteRobots() {
-    for (int i = 0; i < this->robotCount; ++i){
-        delete this->robots[i];
-    }
-    delete[] this->robots;
-}
+// void GameInfo::deleteRobots() {
+//     for (int i = 0; i < this->robotCount; ++i){
+//         delete this->robots[i];
+//     }
+//     delete[] this->robots;
+// }
 
