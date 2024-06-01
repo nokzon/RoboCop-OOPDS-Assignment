@@ -1,5 +1,6 @@
 #include "util.h"
 #include "robots.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -63,21 +64,23 @@ void GameInfo::parseRobotCountInfo(const string& line) {
 }
 
 // Parse the information of each robot
-robot* parseRobotInfo(const string& line) {
+void GameInfo:: parseRobotInfo(const string& line) {
     stringstream s(line);
     string type, name;
     int posY, posX;
     s >> type >> name >> posY >> posX;
 
     if (type == "Madbot"){
-        robot* r = new madBot(type, name, posY, posX);
-        r->printInfo();
-        return r;
+        // robot* r = new madBot(type, name, posY, posX);
+        // r->printInfo();
+        // return r;
+        robots[robotCount++] = new madBot(type, name, posY, posX);
     }
     else if (type != "Madbot"){
-        robot* r = new madBot(type, name, posY, posX);
-        r->printInfo();
-        return r;
+        // robot* r = new madBot(type, name, posY, posX);
+        // r->printInfo();
+        // return r;
+        robots[robotCount++] = new madBot(type, name, posY, posX);
     }
     // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
 
@@ -91,70 +94,43 @@ robot* parseRobotInfo(const string& line) {
 void GameInfo::printGrid() {
     int fieldRows = this->M;
     int fieldCol = this->N;
-    cout << endl;
-    cout << " ";
-    int i = 1, j;
 
-    // Loop that outputs top row of column numbers
-    for (j = 0; j <= 4 * fieldCol; j++) {
-        if (j % 4 == 2) {
-            cout << i++;
-        }
-        else {
-            cout << " ";
+    cout << endl;
+    cout << "    ";
+    for (int i = 0; i < fieldCol; ++i) {
+        cout << i << " ";
+    } cout << endl << endl;
+
+    // Create a dynamic 2D array for the grid
+    char** grid = new char*[M];
+    for (int i = 0; i < fieldRows; ++i) {
+        grid[i] = new char[N];
+        for (int j = 0; j < N; ++j) {
+            grid[i][j] = '.'; // Initialize the grid with '.'
         }
     }
-    cout << endl;
 
-    // Loop to output the entire grid
-    for (i = 0; i <= 2 * fieldRows; i++) {
-        // Print grid numbers on the left side
-        if (i % 2 != 0) {
-            cout << (i / 2) + 1;
-        }
-        else {
-            cout << " ";
-        }
+    // Place robots on the grid
+    for (int i = 0; i < robotCount; ++i) {
+        grid[robots[i] -> getPositionY()][robots[i] -> getPositionX()] = robots[i] -> getSymbol();
+    }
 
-        // Loop to print all rows of the grid
-        for (j = 0; j <= 2 * fieldCol; j++) {
-            if (i % 2 == 0) {
-                if (j == 0) {
-                    cout << " ";
-                }
-                if (j % 2 == 0) {
-                    cout << " ";
-                }
-                else {
-                    cout << "---";
-                }
-            }
-            else {
-                if (j % 2 == 0)
-                    cout << "|";
-                else cout << "   ";
-            }
-        }
-
-        // Print row numbers on the right side
-        if (i % 2 != 0) {
-            cout << (i / 2) + 1;
+    // Print the grid
+    for (int i = 0; i < fieldRows; ++i) {
+        cout << i << "   ";
+        for (int j = 0; j < N; ++j) {
+            cout << grid[i][j] << " ";
         }
         cout << endl;
     }
 
-    // Outputs bottom row of the column numbers
-    cout << " ";
-    for (j = 0, i = 1; j <= 4 * fieldCol; j++) {
-        if (j % 4 == 2) {
-            cout << i++;
-        }
-        else {
-            cout << " ";
-        }
+        // Clean up the dynamic 2D array
+    for (int i = 0; i < M; ++i) {
+        delete[] grid[i];
     }
-    cout << endl;
+    delete[] grid;
 }
+
 
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
@@ -173,9 +149,22 @@ void GameInfo::printGameInfo() {
 }
 
 // Function to delete robot objects
-// void GameInfo::deleteRobots() {
-//     for (int i = 0; i < this->robotCount; ++i){
-//         delete this->robots[i];
-//     }
-//     delete[] this->robots;
-// }
+    // void GameInfo::deleteRobots() {
+    //     for (int i = 0; i < this->robotCount; ++i){
+    //         delete this->robots[i];
+    //     }
+    //     delete[] this->robots;
+    // }
+
+// Definition of the destructor for the GameInfo class
+GameInfo::~GameInfo() {
+    // If you have any dynamically allocated memory to clean up,
+    // you can delete it here. For example:
+    if (robots != nullptr) {
+        for (int i = 0; i < robotCount; ++i) {
+            delete robots[i];
+        }
+        delete[] robots;
+    }
+    // Optionally, you can perform any other cleanup operations here.
+}

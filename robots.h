@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 class robot {
@@ -11,20 +13,36 @@ protected:
     string robotName;
     int posY;
     int posX;
-    char symbol = 'x';
-    int lives = 0;
+    int lives;
 
 public:
     robot(const string& type, const string& name, int r, int c) 
         : robotType(type), robotName(name), posY(r), posX(c) {}
 
+    // Getter functions for protected members
+    string getType() const { return robotType; }
+    string getName() const { return robotName; }
+    int getPositionY() const { return posY; }
+    int getPositionX() const { return posX; }
+    int getLives() const { return lives; }
+    
+    // Pure virtual function to get the symbol representing each robot
+    virtual char getSymbol() const = 0;
+
+    // Print robot information
+    virtual void printInfo() const {
+        cout << robotType << " " << robotName << " at (" << posY << ", " << posX << ")" << endl;
+    }
+
     // These are the virtual functions using polymorphism so that each function can have different definitions.
     virtual void look(int x, int y) = 0;
     virtual void move() = 0;
     virtual void fire(int x, int y) = 0;
-    virtual void printInfo() const = 0;
 
     // Additional common robot functionalities can be added here
+
+    // Make the destructor virtual
+    virtual ~robot() {}
     
 };
 
@@ -70,6 +88,8 @@ public:
 class madBot : public shootingRobot{
 public:
     madBot(const string& type, const string& name, int r, int c) : shootingRobot(type, name, r, c) {}
+
+    char getSymbol() const override {return 'M';}
 
     void look(int x, int y) override {
         cout << robotName << " is madly looking at (" << x << ", " << y << ")" << endl;
