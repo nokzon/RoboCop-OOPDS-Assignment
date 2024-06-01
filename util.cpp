@@ -6,7 +6,7 @@
 #include <sstream>
 using namespace std;
 
-// Function that reads tne input file and parses the information
+// Function that reads the input file and parses the information
 void GameInfo::readFile(const string& filename) {
 
     // Read files input.txt
@@ -20,7 +20,7 @@ void GameInfo::readFile(const string& filename) {
 
     while (getline(myFile, myLine)) {
         // Checks the first line for keywords using stringstream
-        if (myLine.find("M by N: ") != string::npos) {
+        if (myLine.find("M by N: ") != string::npos) {  // npos is used to indicate that no position in the string matches the requested operation
             parseGameGridInfo(myLine);
         }
         // Checks for second line for keywords using stringstream
@@ -86,73 +86,73 @@ robot* parseRobotInfo(const string& line) {
 }
 
 
-// Printing grid function
-void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
-    fieldRows = this->M;
-    cout << endl;
-    cout << " ";
-    int i = 1, j;
+// // Printing grid function
+// void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
+//     fieldRows = this->M;
+//     cout << endl;
+//     cout << " ";
+//     int i = 1, j;
 
-    // Loop that outputs top row of column numbers
-    for (j = 0; j <= 4 * fieldCol; j++) {
-        if (j % 4 == 2) {
-            cout << i++;
-        }
-        else {
-            cout << " ";
-        }
-    }
-    cout << endl;
+//     // Loop that outputs top row of column numbers
+//     for (j = 0; j <= 4 * fieldCol; j++) {
+//         if (j % 4 == 2) {
+//             cout << i++;
+//         }
+//         else {
+//             cout << " ";
+//         }
+//     }
+//     cout << endl;
 
-    // Loop to output the entire grid
-    for (i = 0; i <= 2 * fieldRows; i++) {
-        // Print grid numbers on the left side
-        if (i % 2 != 0) {
-            cout << (i / 2) + 1;
-        }
-        else {
-            cout << " ";
-        }
+//     // Loop to output the entire grid
+//     for (i = 0; i <= 2 * fieldRows; i++) {
+//         // Print grid numbers on the left side
+//         if (i % 2 != 0) {
+//             cout << (i / 2) + 1;
+//         }
+//         else {
+//             cout << " ";
+//         }
 
-        // Loop to print all rows of the grid
-        for (j = 0; j <= 2 * fieldCol; j++) {
-            if (i % 2 == 0) {
-                if (j == 0) {
-                    cout << " ";
-                }
-                if (j % 2 == 0) {
-                    cout << " ";
-                }
-                else {
-                    cout << "---";
-                }
-            }
-            else {
-                if (j % 2 == 0)
-                    cout << "|";
-                else cout << "   ";
-            }
-        }
+//         // Loop to print all rows of the grid
+//         for (j = 0; j <= 2 * fieldCol; j++) {
+//             if (i % 2 == 0) {
+//                 if (j == 0) {
+//                     cout << " ";
+//                 }
+//                 if (j % 2 == 0) {
+//                     cout << " ";
+//                 }
+//                 else {
+//                     cout << "---";
+//                 }
+//             }
+//             else {
+//                 if (j % 2 == 0)
+//                     cout << "|";
+//                 else cout << "   ";
+//             }
+//         }
 
-        // Print row numbers on the right side
-        if (i % 2 != 0) {
-            cout << (i / 2) + 1;
-        }
-        cout << endl;
-    }
+//         // Print row numbers on the right side
+//         if (i % 2 != 0) {
+//             cout << (i / 2) + 1;
+//         }
+//         cout << endl;
+//     }
 
-    // Outputs bottom row of the column numbers
-    cout << " ";
-    for (j = 0, i = 1; j <= 4 * fieldCol; j++) {
-        if (j % 4 == 2) {
-            cout << i++;
-        }
-        else {
-            cout << " ";
-        }
-    }
-    cout << endl;
-}
+//     // Outputs bottom row of the column numbers
+//     cout << " ";
+//     for (j = 0, i = 1; j <= 4 * fieldCol; j++) {
+//         if (j % 4 == 2) {
+//             cout << i++;
+//         }
+//         else {
+//             cout << " ";
+//         }
+//     }
+//     cout << endl;
+// }
 
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
@@ -171,9 +171,9 @@ void GameInfo::printGameInfo() {
 }
 
 // Function to delete robot objects
-void GameInfo::deleteRobots() {
-    for (int i = 0; i < this->robotCount; ++i){
-        delete this->robots[i];
-    }
-    delete[] this->robots;
-}
+// void GameInfo::deleteRobots() {
+//     for (int i = 0; i < this->robotCount; ++i){
+//         delete this->robots[i];
+//     }
+//     delete[] this->robots;
+// }
