@@ -64,8 +64,7 @@ void GameInfo::parseRobotCountInfo(const string& line) {
 // Parse the information of each robot
 robot* parseRobotInfo(const string& line) {
     stringstream s(line);
-    string type, name;
-    int posY, posX;
+    string type, name, posY, posX;
     s >> type >> name >> posY >> posX;
 
     if (type == "Madbot"){
