@@ -48,58 +48,14 @@ public:
 
 class Battlefield {
 private:
-    GameInfo& gameInfo; // Reference to GameInfo
+    GameInfo gameInfo;
+    char** battlefield;                 // 2D array representing the battlefield
 
 public:
-    char** battlefield;
-
-    Battlefield(GameInfo& gameInfo) : gameInfo(gameInfo) {
-        battlefield = new char*[gameInfo.M + 1];
-        for (int i = 0; i <= gameInfo.M; i++) {
-            battlefield[i] = new char[gameInfo.N + 1];
-            for (int j = 0; j <= gameInfo.N; j++) {
-                battlefield[i][j] = '.';
-            }
-        }
-    }
-
-    // Function to check if the given cell has a Robot or not
-    bool isRobot(int row, int col) {
-        if (battlefield[row][col] == 'M')
-            return (true);
-        else 
-            return (false);
-    }
-
-    void printBattlefield(GameInfo& gameInfo) {
-        int i, j;
-        printf("    ");
-
-        for (i = 0; i < gameInfo.N; i++) {
-            if (i < 10) {printf("%d  ", i);}
-            else if (i >= 10) {printf("%d ", i);}
-        }
-
-        printf("\n");
-
-        for (i = 0; i < gameInfo.M; i++) {
-            if (i < 10) {printf("%d   ", i);}
-            else if (i >= 10) {printf("%d  ", i);}
-
-            for (j = 0; j < gameInfo.N; j++)
-                printf("%c  ", battlefield[i][j]);
-            printf("\n");
-        }
-        return;        
-    }
-    
-
-    ~Battlefield() {
-        for (int i = 0; i <= gameInfo.M; i++) {
-            delete[] battlefield[i];
-        }
-        delete[] battlefield;
-    }    
+    Battlefield(GameInfo& gameInfo);    // constructor
+    ~Battlefield();                     // destructor
+    bool isRobot(int row, int col);     // check if cell has robot or not
+    void printBattlefield(GameInfo& gameInfo);
 };
 
 // Function prototypes
