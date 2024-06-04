@@ -87,72 +87,72 @@ robot* parseRobotInfo(const string& line) {
 
 
 // Printing grid function
-void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
-    fieldRows = this->M;
-    cout << endl;
-    cout << " ";
-    int i = 1, j;
+// void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
+//     fieldRows = this->M;
+//     cout << endl;
+//     cout << " ";
+//     int i = 1, j;
 
-    // Loop that outputs top row of column numbers
-    for (j = 0; j <= 4 * fieldCol; j++) {
-        if (j % 4 == 2) {
-            cout << i++;
-        }
-        else {
-            cout << " ";
-        }
-    }
-    cout << endl;
+//     // Loop that outputs top row of column numbers
+//     for (j = 0; j <= 4 * fieldCol; j++) {
+//         if (j % 4 == 2) {
+//             cout << i++;
+//         }
+//         else {
+//             cout << " ";
+//         }
+//     }
+//     cout << endl;
 
-    // Loop to output the entire grid
-    for (i = 0; i <= 2 * fieldRows; i++) {
-        // Print grid numbers on the left side
-        if (i % 2 != 0) {
-            cout << (i / 2) + 1;
-        }
-        else {
-            cout << " ";
-        }
+//     // Loop to output the entire grid
+//     for (i = 0; i <= 2 * fieldRows; i++) {
+//         // Print grid numbers on the left side
+//         if (i % 2 != 0) {
+//             cout << (i / 2) + 1;
+//         }
+//         else {
+//             cout << " ";
+//         }
 
-        // Loop to print all rows of the grid
-        for (j = 0; j <= 2 * fieldCol; j++) {
-            if (i % 2 == 0) {
-                if (j == 0) {
-                    cout << " ";
-                }
-                if (j % 2 == 0) {
-                    cout << " ";
-                }
-                else {
-                    cout << "---";
-                }
-            }
-            else {
-                if (j % 2 == 0)
-                    cout << "|";
-                else cout << "   ";
-            }
-        }
+//         // Loop to print all rows of the grid
+//         for (j = 0; j <= 2 * fieldCol; j++) {
+//             if (i % 2 == 0) {
+//                 if (j == 0) {
+//                     cout << " ";
+//                 }
+//                 if (j % 2 == 0) {
+//                     cout << " ";
+//                 }
+//                 else {
+//                     cout << "---";
+//                 }
+//             }
+//             else {
+//                 if (j % 2 == 0)
+//                     cout << "|";
+//                 else cout << "   ";
+//             }
+//         }
 
-        // Print row numbers on the right side
-        if (i % 2 != 0) {
-            cout << (i / 2) + 1;
-        }
-        cout << endl;
-    }
+//         // Print row numbers on the right side
+//         if (i % 2 != 0) {
+//             cout << (i / 2) + 1;
+//         }
+//         cout << endl;
+//     }
 
-    // Outputs bottom row of the column numbers
-    cout << " ";
-    for (j = 0, i = 1; j <= 4 * fieldCol; j++) {
-        if (j % 4 == 2) {
-            cout << i++;
-        }
-        else {
-            cout << " ";
-        }
-    }
-    cout << endl;
-}
+//     // Outputs bottom row of the column numbers
+//     cout << " ";
+//     for (j = 0, i = 1; j <= 4 * fieldCol; j++) {
+//         if (j % 4 == 2) {
+//             cout << i++;
+//         }
+//         else {
+//             cout << " ";
+//         }
+//     }
+//     cout << endl;
+// 
 
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
@@ -171,9 +171,60 @@ void GameInfo::printGameInfo() {
 }
 
 // Function to delete robot objects
-void GameInfo::deleteRobots() {
-    for (int i = 0; i < this->robotCount; ++i){
-        delete this->robots[i];
+// void GameInfo::deleteRobots() {
+//     for (int i = 0; i < this->robotCount; ++i){
+//         delete this->robots[i];
+//     }
+//     delete[] this->robots;
+// }
+
+
+// constructor implementation
+Battlefield::Battlefield(GameInfo& gameInfo) : gameInfo(gameInfo) {
+    // dynamically allocate memory for the 2D array
+    battlefield = new char*[gameInfo.M + 1];
+    for (int i = 0; i <= gameInfo.M; i++) {
+        battlefield[i] = new char[gameInfo.N + 1];
+        for (int j = 0; j <= gameInfo.N; j++) {
+            battlefield[i][j] = '.';    // initialize all cells to '.'
+        }
     }
-    delete[] this->robots;
+}
+
+// check if the given cell has a Robot or not
+bool Battlefield::isRobot(int row, int col) {
+    if (battlefield[row][col] == 'M')
+        return (true);
+    else 
+        return (false);
+}
+
+void Battlefield::printBattlefield(GameInfo& gameInfo) {
+    int i, j;
+    printf("    ");
+
+    for (i = 0; i < gameInfo.N; i++) {
+        if (i < 10) {printf("%d  ", i);}
+        else if (i >= 10) {printf("%d ", i);}
+    }
+
+    printf("\n");
+
+    for (i = 0; i < gameInfo.M; i++) {
+        if (i < 10) {printf("%d   ", i);}
+        else if (i >= 10) {printf("%d  ", i);}
+
+        for (j = 0; j < gameInfo.N; j++)
+            printf("%c  ", battlefield[i][j]);
+        printf("\n");
+    }
+    return;        
+}
+
+// destructor implementation
+Battlefield::~Battlefield() {
+    for (int i = 0; i <= gameInfo.M; i++) {
+        delete[] battlefield[i];
+    }
+    delete[] battlefield;
 }

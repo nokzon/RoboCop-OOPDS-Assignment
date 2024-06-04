@@ -25,7 +25,7 @@ using namespace std;
 
 // Information gotten after parsing the initial game text file
 class GameInfo {
-private:
+public:
     int M;              // row 
     int N;              // column
     int steps;
@@ -34,15 +34,28 @@ private:
     // robotInfo* robots;  // Pointer to array for robot info  
 
 public:
-    friend class RobotInfo;
+    // friend class RobotInfo; NOT NEEDED?
+    friend class Battlefield;
 
     void readFile(const string& filename);
     void parseGameGridInfo(const string& line);
     void parseStepsInfo(const string& line);
     void parseRobotCountInfo(const string& line);
     void printGameInfo();
-    void printGrid(int &fieldRows, int &fieldCol);
     void deleteRobots();
+
+};
+
+class Battlefield {
+private:
+    GameInfo gameInfo;
+    char** battlefield;                 // 2D array representing the battlefield
+
+public:
+    Battlefield(GameInfo& gameInfo);    // constructor
+    ~Battlefield();                     // destructor
+    bool isRobot(int row, int col);     // check if cell has robot or not
+    void printBattlefield(GameInfo& gameInfo);
 };
 
 // Function prototypes

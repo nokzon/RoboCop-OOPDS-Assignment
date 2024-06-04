@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "util.h"
 #include "util.cpp"
 using namespace std;
@@ -6,10 +7,15 @@ using namespace std;
 
 int main(){
     string filename = "input.txt";
+
     GameInfo gameInfo;
     gameInfo.readFile(filename);
     gameInfo.printGameInfo();    // Print the parsed information to verify it
-    gameInfo.deleteRobots();
+
+    Battlefield battlefield(gameInfo);
+    battlefield.printBattlefield(gameInfo);
+
+    // gameInfo.deleteRobots();
     
     // Moved to function deleteRobots()
     // for (int i = 0; i < gameInfo.robotCount; ++i){

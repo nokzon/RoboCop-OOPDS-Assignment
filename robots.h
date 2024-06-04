@@ -17,6 +17,9 @@ protected:
 public:
     robot(const string& type, const string& name, int r, int c) 
         : robotType(type), robotName(name), posY(r), posX(c) {}
+    
+    // Pure virtual function to get the symbol representing each robot
+    virtual char getSymbol() const = 0;
 
     // These are the virtual functions using polymorphism so that each function can have different definitions.
     virtual void look(int x, int y) = 0;
@@ -70,6 +73,8 @@ public:
 class madBot : public shootingRobot{
 public:
     madBot(const string& type, const string& name, int r, int c) : shootingRobot(type, name, r, c) {}
+
+    char getSymbol() const override {return 'M';}
 
     void look(int x, int y) override {
         cout << robotName << " is madly looking at (" << x << ", " << y << ")" << endl;
