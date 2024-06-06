@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include "gameinfo.h"
+#include "gameInfo.h"
 #include "robots.h"
 using namespace std;
 
