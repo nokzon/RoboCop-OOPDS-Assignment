@@ -24,9 +24,8 @@ Battlefield::Battlefield(GameInfo& gameInfo) : gameInfo(gameInfo) {
 // check if the given cell has a Robot or not
 bool Battlefield::isRobot(int row, int col) {
     if (battlefield[row][col] == 'M')
-        return (true);
-    else 
-        return (false);
+        return true;
+    return false;
 }
 
 void Battlefield::printBattlefield(GameInfo& gameInfo) {

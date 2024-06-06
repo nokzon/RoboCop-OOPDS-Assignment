@@ -6,7 +6,7 @@
 #include "gameInfo.h"
 using namespace std;
 
-class robot {
+class Robot {
 protected:
     string robotType;
     string robotName;
@@ -16,10 +16,8 @@ protected:
     int lives = 0;
 
 public:
-    robot(const string& type, const string& name, int r, int c) 
+    Robot(const string& type, const string& name, int r, int c) 
         : robotType(type), robotName(name), posY(r), posX(c) {}
-    
-    void parseRobotInfo(const std::string& line);
     
     // Pure virtual function to get the symbol representing each robot
     virtual char getSymbol() const = 0;
@@ -28,51 +26,54 @@ public:
     virtual void look(int x, int y) = 0;
     virtual void move() = 0;
     virtual void fire(int x, int y) = 0;
-    virtual void printInfo() const = 0;
+    void printInfo() {
+        cout << "Type: " << robotType << ", Name: " << robotName << ", Position: ("
+             << posY << ", " << posX << ")" << endl;
+    }
 
     // Additional common robot functionalities can be added here
     
 };
 
-// movingRobot class inheriting robot base class
-class movingRobot : public robot{
+// MovingRobot class inheriting robot base class
+class MovingRobot : public Robot{
 protected:
     string type, name, r, c;
 public:
-    movingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
+    MovingRobot(const string& type, const string& name, int r, int c) : Robot(type, name, r, c) {}
     // TODO: Moving logic;
 };
 
-// shootingRobot class inheriting robot base class
-class shootingRobot : public robot{
+// ShootingRobot class inheriting robot base class
+class ShootingRobot : public Robot{
 protected:
     string type, name, r, c;
 public:
-    shootingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
+    ShootingRobot(const string& type, const string& name, int r, int c) : Robot(type, name, r, c) {}
     // TODO: Shooting logic;
 };
 
-class seeingRobot : public robot{
+class SeeingRobot : public Robot{
 protected:
     string type, name, r, c;
 public:
-    seeingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
+    SeeingRobot(const string& type, const string& name, int r, int c) : Robot(type, name, r, c) {}
     // TODO: Shooting logic;
 };
 
-class steppingRobot : public robot{
+class SteppingRobot : public Robot{
 protected:
     string type, name, r, c;
 
 public:
-    steppingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
+    SteppingRobot(const string& type, const string& name, int r, int c) : Robot(type, name, r, c) {}
     // TODO: Shooting logic;
 };
 
-// madBot derived class inheriting shootingRobot derived class
-class madBot : public shootingRobot{
+// MadBot derived class inheriting shootingRobot derived class
+class MadBot : public ShootingRobot{
 public:
-    madBot(const string& type, const string& name, int r, int c) : shootingRobot(type, name, r, c) {}
+    MadBot(const string& type, const string& name, int r, int c) : ShootingRobot(type, name, r, c) {}
 
     char getSymbol() const override {return 'M';}
 
@@ -87,45 +88,30 @@ public:
     void fire(int x, int y) override {
         cout << robotName << " is madly firing at (" << y << ", " << x << ")" << endl;
     }
-
-    void printInfo() const override {
-        cout << "Type: " << robotType << ", Name: " << robotName << ", Position: ("
-             << posY << ", " << posX << ")" << endl;
-    }
     // TODO: Once value return, we can pass it into the action classes to perform
-    
 };
 
-class roboTank : public movingRobot, public seeingRobot, public steppingRobot, public shootingRobot{
+class RoboTank : public MovingRobot, public SeeingRobot, public SteppingRobot, public ShootingRobot{
     // TODO: All the functions;
 };
 
-
-class RoboCop : public movingRobot, public seeingRobot, public shootingRobot{
+class RoboCop : public MovingRobot, public SeeingRobot, public ShootingRobot{
     //TODO: All the functions;
 };
 
-class Terminator : public movingRobot, public seeingRobot, public steppingRobot{
+class Terminator : public MovingRobot, public SeeingRobot, public SteppingRobot{
     //TODO: All the functions;
 };
 
-class TerminatorRoboCop : public movingRobot, public seeingRobot, public steppingRobot, public shootingRobot{
+class TerminatorRoboCop : public MovingRobot, public SeeingRobot, public SteppingRobot, public ShootingRobot{
     //TODO: All the functions;
 };
 
-class BlueThunder : public shootingRobot{
+class BlueThunder : public ShootingRobot{
     //TODO: All the functions;
 };
 
-class madbot : public shootingRobot{
-    //TODO: All the functions;
-};
-
-class RoboTank : public movingRobot, public seeingRobot, public steppingRobot, public shootingRobot{
-    //TODO: All the functions;
-};
-
-class UltimateRobot : public movingRobot, public steppingRobot, public seeingRobot, public shootingRobot{
+class UltimateRobot : public MovingRobot, public SteppingRobot, public SeeingRobot, public ShootingRobot{
     //TODO: All the functions;
 };
 

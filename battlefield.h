@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include "gameInfo.h"
+#include "gameinfo.h"
 #include "robots.h"
 using namespace std;
 
@@ -23,7 +23,7 @@ public:
 
 // Function prototypes
 // void addRobot(GameInfo &info, const RobotInfo &robot);
-robot* parseRobotInfo(const string& line); // weird
+Robot* parseRobotInfo(const string& line); // weird
 
 
 #endif

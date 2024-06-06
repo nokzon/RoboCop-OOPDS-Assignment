@@ -2,8 +2,9 @@
 #include <ctime>
 #include "battlefield.h"
 #include "battlefield.cpp"
-#include "gameInfo.h"
-#include "gameInfo.cpp"
+#include "gameinfo.h"
+#include "gameinfo.cpp"
+#include "simulation.cpp"
 using namespace std;
 
 
@@ -17,6 +18,8 @@ int main(){
 
     Battlefield battlefield(gameInfo);
     battlefield.printBattlefield(gameInfo);
+
+    //beginSimulation();
 
     return 0;
 }
