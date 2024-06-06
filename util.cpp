@@ -147,15 +147,15 @@ void Battlefield::printBattlefield(GameInfo& gameInfo) {
     printf("    ");
 
     for (i = 0; i < gameInfo.N; i++) {
-        if (i < 10) {printf("%d  ", i);}
-        else if (i >= 10) {printf("%d ", i);}
+        if (i < 9) {cout << i+1 << "  ";}
+        else if (i >= 9) {cout << i+1 << " ";}
     }
 
     printf("\n");
 
     for (i = 0; i < gameInfo.M; i++) {
-        if (i < 10) {printf("%d   ", i);}
-        else if (i >= 10) {printf("%d  ", i);}
+        if (i < 9) {cout << i+1 << "   ";}
+        else if (i >= 9) {cout << i+1 << "  ";}
 
         for (j = 0; j < gameInfo.N; j++)
             printf("%c  ", battlefield[i][j]);
