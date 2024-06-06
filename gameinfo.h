@@ -19,7 +19,6 @@ public:
     robot** robots;
     // robotInfo* robots;  // Pointer to array for robot info  
 
-    // friend class RobotInfo; NOT NEEDED?
     friend class Battlefield;
     friend class robot;
 

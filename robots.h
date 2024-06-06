@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include "gameinfo.h"
+#include "gameInfo.h"
 using namespace std;
 
 class robot {

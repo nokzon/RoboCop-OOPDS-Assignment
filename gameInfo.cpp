@@ -1,6 +1,6 @@
-#include "util.h"
+#include "battlefield.h"
 #include "robots.h"
-#include "gameinfo.h"
+#include "gameInfo.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -102,15 +102,6 @@ void GameInfo::printGameInfo() {
     cout << "Grid Dimensions: " << this->M << " by " << this->N << endl;
     cout << "Steps: " << this->steps << endl;
     cout << "Number of Robots: " << this->robotCount << endl;
-
-    // Redundant stuff lol
-    // for (int i = 0; i < this->robotCount; i++){
-    //     this->robots[i]->printInfo();
-    // }
-    // for (int i = 0; i < info.robotCount; ++i) {
-    //     cout << "Robot " << (i + 1) << ": " << info.robots[i].type << " " << info.robots[i].name 
-    //          << " at (" << info.robots[i].positionX << ", " << info.robots[i].positionY << ")" << endl;
-    // }
 }
 
 // Function to delete robot objects
@@ -120,54 +111,3 @@ void GameInfo::printGameInfo() {
 //     }
 //     delete[] this->robots;
 // }
-
-
-// constructor implementation
-Battlefield::Battlefield(GameInfo& gameInfo) : gameInfo(gameInfo) {
-    // dynamically allocate memory for the 2D array
-    battlefield = new char*[gameInfo.M + 1];
-    for (int i = 0; i <= gameInfo.M; i++) {
-        battlefield[i] = new char[gameInfo.N + 1];
-        for (int j = 0; j <= gameInfo.N; j++) {
-            battlefield[i][j] = '.';    // initialize all cells to '.'
-        }
-    }
-}
-
-// check if the given cell has a Robot or not
-bool Battlefield::isRobot(int row, int col) {
-    if (battlefield[row][col] == 'M')
-        return (true);
-    else 
-        return (false);
-}
-
-void Battlefield::printBattlefield(GameInfo& gameInfo) {
-    int i, j;
-    printf("    ");
-
-    for (i = 0; i < gameInfo.N; i++) {
-        if (i < 9) {cout << i+1 << "  ";}
-        else if (i >= 9) {cout << i+1 << " ";}
-    }
-
-    printf("\n");
-
-    for (i = 0; i < gameInfo.M; i++) {
-        if (i < 9) {cout << i+1 << "   ";}
-        else if (i >= 9) {cout << i+1 << "  ";}
-
-        for (j = 0; j < gameInfo.N; j++)
-            printf("%c  ", battlefield[i][j]);
-        printf("\n");
-    }
-    return;        
-}
-
-// destructor implementation
-Battlefield::~Battlefield() {
-    for (int i = 0; i <= gameInfo.M; i++) {
-        delete[] battlefield[i];
-    }
-    delete[] battlefield;
-}
