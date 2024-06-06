@@ -1,4 +1,4 @@
-M by N: 15 10
+M by N: 20 10
 Steps: 50
 Robots: 5
 Madbot Kidd 3 6

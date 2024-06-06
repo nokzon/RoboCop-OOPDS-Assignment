@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "gameinfo.h"
 using namespace std;
 
 class robot {
@@ -17,6 +18,8 @@ protected:
 public:
     robot(const string& type, const string& name, int r, int c) 
         : robotType(type), robotName(name), posY(r), posX(c) {}
+    
+    void parseRobotInfo(const std::string& line);
     
     // Pure virtual function to get the symbol representing each robot
     virtual char getSymbol() const = 0;
@@ -34,8 +37,7 @@ public:
 // movingRobot class inheriting robot base class
 class movingRobot : public robot{
 protected:
-    string type, name;
-    int r, c;
+    string type, name, r, c;
 public:
     movingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Moving logic;
@@ -44,8 +46,7 @@ public:
 // shootingRobot class inheriting robot base class
 class shootingRobot : public robot{
 protected:
-    string type, name;
-    int r, c;
+    string type, name, r, c;
 public:
     shootingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Shooting logic;
@@ -53,8 +54,7 @@ public:
 
 class seeingRobot : public robot{
 protected:
-    string type, name;
-    int r, c;
+    string type, name, r, c;
 public:
     seeingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Shooting logic;
@@ -62,8 +62,8 @@ public:
 
 class steppingRobot : public robot{
 protected:
-    string type, name;
-    int r, c;
+    string type, name, r, c;
+
 public:
     steppingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Shooting logic;
@@ -77,7 +77,7 @@ public:
     char getSymbol() const override {return 'M';}
 
     void look(int x, int y) override {
-        cout << robotName << " is madly looking at (" << x << ", " << y << ")" << endl;
+        cout << robotName << " is madly looking at (" << y << ", " << x << ")" << endl;
     }
 
     void move() override {
@@ -85,7 +85,7 @@ public:
     }
 
     void fire(int x, int y) override {
-        cout << robotName << " is madly firing at (" << x << ", " << y << ")" << endl;
+        cout << robotName << " is madly firing at (" << y << ", " << x << ")" << endl;
     }
 
     void printInfo() const override {
