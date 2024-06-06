@@ -3,28 +3,31 @@
 
 #include <string>
 #include <iostream>
+#include "gameinfo.h"
 using namespace std;
 
 class robot {
 protected:
     string robotType;
     string robotName;
-    string posY;
-    string posX;
+    int posY;
+    int posX;
     char symbol = 'x';
     int lives = 0;
 
 public:
-    robot(const string& type, const string& name, string r, string c) 
+    robot(const string& type, const string& name, int r, int c) 
         : robotType(type), robotName(name), posY(r), posX(c) {}
+    
+    void parseRobotInfo(const std::string& line);
     
     // Pure virtual function to get the symbol representing each robot
     virtual char getSymbol() const = 0;
 
     // These are the virtual functions using polymorphism so that each function can have different definitions.
-    virtual void look(string x, string y) = 0;
+    virtual void look(int x, int y) = 0;
     virtual void move() = 0;
-    virtual void fire(string x, string y) = 0;
+    virtual void fire(int x, int y) = 0;
     virtual void printInfo() const = 0;
 
     // Additional common robot functionalities can be added here
@@ -36,7 +39,7 @@ class movingRobot : public robot{
 protected:
     string type, name, r, c;
 public:
-    movingRobot(const string& type, const string& name, string r, string c) : robot(type, name, r, c) {}
+    movingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Moving logic;
 };
 
@@ -45,7 +48,7 @@ class shootingRobot : public robot{
 protected:
     string type, name, r, c;
 public:
-    shootingRobot(const string& type, const string& name, string r, string c) : robot(type, name, r, c) {}
+    shootingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Shooting logic;
 };
 
@@ -53,7 +56,7 @@ class seeingRobot : public robot{
 protected:
     string type, name, r, c;
 public:
-    seeingRobot(const string& type, const string& name, string r, string c) : robot(type, name, r, c) {}
+    seeingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Shooting logic;
 };
 
@@ -62,27 +65,27 @@ protected:
     string type, name, r, c;
 
 public:
-    steppingRobot(const string& type, const string& name, string r, string c) : robot(type, name, r, c) {}
+    steppingRobot(const string& type, const string& name, int r, int c) : robot(type, name, r, c) {}
     // TODO: Shooting logic;
 };
 
 // madBot derived class inheriting shootingRobot derived class
 class madBot : public shootingRobot{
 public:
-    madBot(const string& type, const string& name, string r, string c) : shootingRobot(type, name, r, c) {}
+    madBot(const string& type, const string& name, int r, int c) : shootingRobot(type, name, r, c) {}
 
     char getSymbol() const override {return 'M';}
 
-    void look(string x, string y) override {
-        cout << robotName << " is madly looking at (" << x << ", " << y << ")" << endl;
+    void look(int x, int y) override {
+        cout << robotName << " is madly looking at (" << y << ", " << x << ")" << endl;
     }
 
     void move() override {
         cout << robotName << " is madly moving" << endl;
     }
 
-    void fire(string x, string y) override {
-        cout << robotName << " is madly firing at (" << x << ", " << y << ")" << endl;
+    void fire(int x, int y) override {
+        cout << robotName << " is madly firing at (" << y << ", " << x << ")" << endl;
     }
 
     void printInfo() const override {

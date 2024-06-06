@@ -6,6 +6,7 @@ using namespace std;
 
 
 int main(){
+    srand(time(NULL));
     string filename = "input.txt";
 
     GameInfo gameInfo;

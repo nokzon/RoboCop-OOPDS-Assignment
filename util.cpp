@@ -1,10 +1,13 @@
 #include "util.h"
 #include "robots.h"
+#include "gameinfo.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
-using namespace std;
+#include <cmath>
+#include <cstdlib>
+using namespace std; 
 
 // Function that reads tne input file and parses the information
 void GameInfo::readFile(const string& filename) {
@@ -34,7 +37,7 @@ void GameInfo::readFile(const string& filename) {
 
             for (int i = 0; i < this->robotCount; ++i) {
                 getline(myFile, myLine);
-                parseRobotInfo(myLine);
+                this->robots[i] = parseRobotInfo(myLine, *this); // Store the created robot object in the robots array
             }
         }
     }
@@ -50,7 +53,6 @@ void GameInfo::parseGameGridInfo(const string& line) {
     s >> dummy >> dummy >> dummy >> this->M >> this->N;
 }
 
-
 // Parse the number of steps from the input line    
 void GameInfo::parseStepsInfo(const string& line) {
     this->steps = stoi(line.substr(7)); // Extract the number of steps from the line
@@ -59,13 +61,24 @@ void GameInfo::parseStepsInfo(const string& line) {
 // Parse the number of robots from the input line
 void GameInfo::parseRobotCountInfo(const string& line) {
     this->robotCount = stoi(line.substr(8)); // Extract the number of robots from the line
+    this->robots = new robot*[this->robotCount]; // Allocate memory for the robots array
+    
 }
 
 // Parse the information of each robot
-robot* parseRobotInfo(const string& line) {
+robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInfo) {
     stringstream s(line);
-    string type, name, posY, posX;
-    s >> type >> name >> posY >> posX;
+    string type, name, posYStr, posXStr;
+    int posY, posX;
+    s >> type >> name >> posYStr >> posXStr;
+
+    if (posYStr.at(0) == 'r' || posXStr.at(0) == 'r') {
+        posY = rand() % gameInfo.M; // generate a random number between 0 and M-1
+        posX = rand() % gameInfo.N; // generate a random number between 0 and N-1
+    } else {
+        posY = stoi(posYStr);
+        posX = stoi(posXStr);
+    }
 
     if (type == "Madbot"){
         robot* r = new madBot(type, name, posY, posX);
@@ -83,75 +96,6 @@ robot* parseRobotInfo(const string& line) {
         throw runtime_error("Unknown robot type!");
     }
 }
-
-
-// Printing grid function
-// void GameInfo::printGrid(int &fieldRows, int &fieldCol) {
-//     fieldRows = this->M;
-//     cout << endl;
-//     cout << " ";
-//     int i = 1, j;
-
-//     // Loop that outputs top row of column numbers
-//     for (j = 0; j <= 4 * fieldCol; j++) {
-//         if (j % 4 == 2) {
-//             cout << i++;
-//         }
-//         else {
-//             cout << " ";
-//         }
-//     }
-//     cout << endl;
-
-//     // Loop to output the entire grid
-//     for (i = 0; i <= 2 * fieldRows; i++) {
-//         // Print grid numbers on the left side
-//         if (i % 2 != 0) {
-//             cout << (i / 2) + 1;
-//         }
-//         else {
-//             cout << " ";
-//         }
-
-//         // Loop to print all rows of the grid
-//         for (j = 0; j <= 2 * fieldCol; j++) {
-//             if (i % 2 == 0) {
-//                 if (j == 0) {
-//                     cout << " ";
-//                 }
-//                 if (j % 2 == 0) {
-//                     cout << " ";
-//                 }
-//                 else {
-//                     cout << "---";
-//                 }
-//             }
-//             else {
-//                 if (j % 2 == 0)
-//                     cout << "|";
-//                 else cout << "   ";
-//             }
-//         }
-
-//         // Print row numbers on the right side
-//         if (i % 2 != 0) {
-//             cout << (i / 2) + 1;
-//         }
-//         cout << endl;
-//     }
-
-//     // Outputs bottom row of the column numbers
-//     cout << " ";
-//     for (j = 0, i = 1; j <= 4 * fieldCol; j++) {
-//         if (j % 4 == 2) {
-//             cout << i++;
-//         }
-//         else {
-//             cout << " ";
-//         }
-//     }
-//     cout << endl;
-// 
 
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
