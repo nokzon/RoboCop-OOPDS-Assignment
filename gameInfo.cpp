@@ -1,6 +1,6 @@
 #include "battlefield.h"
 #include "robots.h"
-#include "gameInfo.h"
+#include "gameinfo.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -61,12 +61,11 @@ void GameInfo::parseStepsInfo(const string& line) {
 // Parse the number of robots from the input line
 void GameInfo::parseRobotCountInfo(const string& line) {
     this->robotCount = stoi(line.substr(8)); // Extract the number of robots from the line
-    this->robots = new robot*[this->robotCount]; // Allocate memory for the robots array
-    
+    this->robots = new Robot*[this->robotCount]; // Allocate memory for the robots array
 }
 
 // Parse the information of each robot
-robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInfo) {
+Robot* GameInfo::parseRobotInfo(const string& line, const GameInfo& gameInfo) {
     stringstream s(line);
     string type, name, posYStr, posXStr;
     int posY, posX;
@@ -80,13 +79,38 @@ robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
         posX = stoi(posXStr);
     }
 
-    if (type == "Madbot"){
-        robot* r = new madBot(type, name, posY, posX);
+    if (type == "RoboCop"){
+        Robot* r = new RoboCop(type, name, posY, posX);
         r->printInfo();
         return r;
     }
-    else if (type != "Madbot"){
-        robot* r = new madBot(type, name, posY, posX);
+    else if (type == "Terminator"){
+        Robot* r = new Terminator(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "TerminatorRoboCop"){
+        Robot* r = new TerminatorRoboCop(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "BlueThunder"){
+        Robot* r = new BlueThunder(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "Madbot"){
+        Robot* r = new Madbot(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "RoboTank"){
+        Robot* r = new RoboTank(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "UltimateRobot"){
+        Robot* r = new UltimateRobot(type, name, posY, posX);
         r->printInfo();
         return r;
     }

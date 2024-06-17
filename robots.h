@@ -70,19 +70,19 @@ public:
     // TODO: Shooting logic;
 };
 
-// MadBot derived class inheriting shootingRobot derived class
-class MadBot : public ShootingRobot{
+// Madbot derived class inheriting shootingRobot derived class
+class Madbot : public ShootingRobot{
 public:
-    MadBot(const string& type, const string& name, int r, int c) : ShootingRobot(type, name, r, c) {}
+    Madbot(const string& type, const string& name, int r, int c) : ShootingRobot(type, name, r, c) {}
 
     char getSymbol() const override {return 'M';}
 
     void look(int x, int y) override {
-        cout << robotName << " is madly looking at (" << y << ", " << x << ")" << endl;
+        cout << robotName << " does not look around" << endl;
     }
 
     void move() override {
-        cout << robotName << " is madly moving" << endl;
+        cout << robotName << " does not move" << endl;
     }
 
     void fire(int x, int y) override {
@@ -92,7 +92,23 @@ public:
 };
 
 class RoboTank : public MovingRobot, public SeeingRobot, public SteppingRobot, public ShootingRobot{
-    // TODO: All the functions;
+public:
+    RoboTank(const string& type, const string& name, int r, int c) : MovingRobot(type, name, r, c), SeeingRobot(type, name, r, c), SteppingRobot(type, name, r, c), ShootingRobot(type, name, r ,c) {}
+
+    char getSymbol() const override {return 'R';}
+
+    void look(int x, int y) override {
+        cout << MovingRobot::robotName << " looks at (" << y << ", " << x << ")" << endl;
+    }
+
+    void move() override {
+        cout << MovingRobot::robotName << " moves towards " << endl;
+    }
+
+    void fire(int x, int y) override {
+        cout << MovingRobot::robotName << " is madly firing at (" << y << ", " << x << ")" << endl;
+    }
+    // TODO: Once value return, we can pass it into the action classes to perform
 };
 
 class RoboCop : public MovingRobot, public SeeingRobot, public ShootingRobot{

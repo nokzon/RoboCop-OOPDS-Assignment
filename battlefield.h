@@ -21,9 +21,4 @@ public:
     void printBattlefield(GameInfo& gameInfo);
 };
 
-// Function prototypes
-// void addRobot(GameInfo &info, const RobotInfo &robot);
-Robot* parseRobotInfo(const string& line); // weird
-
-
 #endif

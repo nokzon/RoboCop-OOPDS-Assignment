@@ -17,7 +17,6 @@ public:
     int steps;
     int robotCount;     // Number of Robots  
     Robot** robots;
-    // robotInfo* robots;  // Pointer to array for robot info  
 
     friend class Battlefield;
     friend class Robot;
@@ -26,9 +25,9 @@ public:
     void parseGameGridInfo(const string& line);
     void parseStepsInfo(const string& line);
     void parseRobotCountInfo(const string& line);
-    Robot* parseRobotInfo(const string& line, const GameInfo& gameInfo);
     void printGameInfo();
     void deleteRobots();
+    Robot* parseRobotInfo(const string& line, const GameInfo& gameInfo);
 };
 
 #endif // GAMEINFO_H
