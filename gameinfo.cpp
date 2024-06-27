@@ -1,6 +1,6 @@
-#include "battlefield.h"
-#include "robots.h"
-#include "gameInfo.h"
+#include "battlefield.hpp"
+#include "robots.hpp"
+#include "gameinfo.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,10 +10,10 @@
 using namespace std; 
 
 // Function that reads tne input file and parses the information
-void GameInfo::readFile(const string& filename) {
+void GameInfo::readFile(const string& fileName) {
 
     // Read files input.txt
-    ifstream myFile("input.txt");
+    ifstream myFile(fileName);
     string myLine;
 
     if (!myFile) {
@@ -33,7 +33,6 @@ void GameInfo::readFile(const string& filename) {
         // Checks for second line for keywords using stringstream
         if (myLine.find("Robots: ") != string::npos) {
             parseRobotCountInfo(myLine);
-            // info.robots = new RobotInfo[info.robotCount];   // Allocate memory for robots based on robot Count
 
             for (int i = 0; i < this->robotCount; ++i) {
                 getline(myFile, myLine);
@@ -44,7 +43,6 @@ void GameInfo::readFile(const string& filename) {
     // Close file to prevent wasting memory resources
     myFile.close();
 }
-
 
 // Parse the grid information from the first line of the text file
 void GameInfo::parseGameGridInfo(const string& line) {
@@ -61,12 +59,12 @@ void GameInfo::parseStepsInfo(const string& line) {
 // Parse the number of robots from the input line
 void GameInfo::parseRobotCountInfo(const string& line) {
     this->robotCount = stoi(line.substr(8)); // Extract the number of robots from the line
-    this->robots = new robot*[this->robotCount]; // Allocate memory for the robots array
+    this->robots = new Robot*[this->robotCount]; // Allocate memory for the robots array
     
 }
 
 // Parse the information of each robot
-robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInfo) {
+Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInfo) {
     stringstream s(line);
     string type, name, posYStr, posXStr;
     int posY, posX;
@@ -80,13 +78,13 @@ robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
         posX = stoi(posXStr);
     }
 
-    if (type == "Madbot"){
-        robot* r = new madBot(type, name, posY, posX);
+    if (type == "MadBot"){
+        Robot* r = new MadBot(type, name, posY, posX);
         r->printInfo();
         return r;
     }
-    else if (type != "Madbot"){
-        robot* r = new madBot(type, name, posY, posX);
+    else if (type != "MadBot"){
+        Robot* r = new MadBot(type, name, posY, posX);
         r->printInfo();
         return r;
     }

@@ -1,12 +1,12 @@
-#ifndef GAMEINFO_H
-#define GAMEINFO_H
+#ifndef GAMEINFO_HPP
+#define GAMEINFO_HPP
 
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <random>
-#include "robots.h"
+#include "robots.hpp"
 using namespace std;
 
 // Information gotten after parsing the initial game text file
@@ -16,20 +16,19 @@ public:
     int N;              // column, x
     int steps;
     int robotCount;     // Number of Robots  
-    robot** robots;
+    Robot** robots;
     // robotInfo* robots;  // Pointer to array for robot info  
 
     friend class Battlefield;
-    friend class robot;
+    friend class Robot;
 
-    void readFile(const string& filename);
+    void readFile(const string& fileName);
     void parseGameGridInfo(const string& line);
     void parseStepsInfo(const string& line);
     void parseRobotCountInfo(const string& line);
-    robot* parseRobotInfo(const std::string& line, const GameInfo& gameInfo) ;
+    Robot* parseRobotInfo(const string& line, const GameInfo& gameInfo);
     void printGameInfo();
     void deleteRobots();
-
 };
 
-#endif // GAMEINFO_H
+#endif // GAMEINFO_HPP

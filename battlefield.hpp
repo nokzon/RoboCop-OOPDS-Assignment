@@ -1,12 +1,12 @@
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef BATTLEFIELD_HPP
+#define BATTLEFIELD_HPP
 
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
-#include "gameInfo.h"
-#include "robots.h"
+#include "gameinfo.hpp"
+#include "robots.hpp"
 using namespace std;
 
 class Battlefield {
@@ -20,10 +20,5 @@ public:
     bool isRobot(int row, int col);     // check if cell has robot or not
     void printBattlefield(GameInfo& gameInfo);
 };
-
-// Function prototypes
-// void addRobot(GameInfo &info, const RobotInfo &robot);
-robot* parseRobotInfo(const string& line); // weird
-
 
 #endif
