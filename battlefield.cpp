@@ -1,6 +1,6 @@
-#include "battlefield.h"
-#include "robots.h"
-#include "gameInfo.h"
+#include "battlefield.hpp"
+#include "robots.hpp"
+#include "gameinfo.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
