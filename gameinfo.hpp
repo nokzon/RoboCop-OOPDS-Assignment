@@ -1,11 +1,8 @@
 #ifndef GAMEINFO_HPP
 #define GAMEINFO_HPP
 
-#include <iostream>
 #include <string>
-#include <sstream>
-#include <fstream>
-#include <random>
+#include <vector>
 #include "robots.hpp"
 using namespace std;
 
@@ -17,7 +14,11 @@ public:
     int steps;
     int robotCount;     // Number of Robots  
     Robot** robots;
+    string type, name, posYStr, posXStr;
     // robotInfo* robots;  // Pointer to array for robot info  
+    
+    vector<pair<string, int>> robotStatusPair;
+    vector<string> waitingStatusRobot;
 
     friend class Battlefield;
     friend class Robot;
@@ -29,6 +30,9 @@ public:
     Robot* parseRobotInfo(const string& line, const GameInfo& gameInfo);
     void printGameInfo();
     void deleteRobots();
+    void robotStatus(string& name);
+    void printRobotStatus();
+    void waitingRobots(string& name);
 };
 
 #endif // GAMEINFO_HPP
