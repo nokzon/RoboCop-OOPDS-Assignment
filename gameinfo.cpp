@@ -84,49 +84,49 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
     if (type == "MadBot"){
         Robot* r = new MadBot(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     else if (type == "RoboCop"){
         Robot* r = new RoboCop(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     else if (type == "Terminator"){
         Robot* r = new Terminator(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     else if (type == "TerminatorRoboCop"){
         Robot* r = new TerminatorRoboCop(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     else if (type == "BlueThunder"){
         Robot* r = new BlueThunder(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     else if (type == "RoboTank"){
         Robot* r = new RoboTank(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     else if (type == "UltimateRobot"){
         Robot* r = new UltimateRobot(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     else if (type != "MadBot"){
         Robot* r = new MadBot(type, name, posY, posX);
         r->printInfo();
-        robotStatus(name, type);
+        robotStatus(name);
         return r;
     }
     // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
