@@ -2,7 +2,7 @@
 #define ROBOTQUEUE_HPP
 
 #include <vector>
-#include "robots.hpp" // Include the header for the Robot class
+#include "robots.hpp"
 
 class RobotQueue {
 private:

@@ -26,5 +26,7 @@ int main() {
     
     battlefield.printBattlefield();
 
+    battlefield.getRobot(4)->look(0, 0);
+
     return 0;
 }

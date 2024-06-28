@@ -20,6 +20,7 @@ public:
     void updateBattlefield();           // update battlefield with robots
     void printBattlefield();
     Robot* findRobotAtPosition(int posY, int posX) const;
+    Robot* getRobot(int x) { return robots[x]; }
 };
 
 #endif

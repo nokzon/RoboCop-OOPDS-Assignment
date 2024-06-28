@@ -3,7 +3,11 @@
 
 #include <string>
 #include "gameinfo.hpp"
+#include "battlefield.hpp"
 using namespace std;
+
+class GameInfo;
+class Battlefield;
 
 class Robot {
 protected:
@@ -13,8 +17,11 @@ protected:
     int posX;
     int lives = 0;
     char symbol = 'X';
+    GameInfo* gameInfo;
+    Battlefield* battlefield;
 
 public:
+    string getName() const {return robotName;}
     Robot(const string& type, const string& name, int r, int c);
     
     void parseRobotInfo(const string& line);
