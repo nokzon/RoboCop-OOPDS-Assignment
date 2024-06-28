@@ -54,6 +54,24 @@ void SeeingRobot::look(int x, int y)
 {
     // Looks at a specific coordinate on the grid, then reveals a 3x3 area around that coordinate
     // 3x3 area needs to reveal whether parts of it are in battlefield or not, and reveal robot if there's one
+    int dx[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+    int dy[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+    for (int d = 0; d < 8; d++) {
+        int newRow = y + dy[d];
+        int newCol = x + dx[d];
+
+        // Check if the new position is within the battlefield
+        if (newRow >= 0 && newRow < gameInfo.M && newCol >= 0 && newCol < gameInfo.N) {
+            // Check if there's a robot at the new position
+            Robot* robot = battlefield.findRobotAtPosition(newRow, newCol);
+            if (robot) {
+                cout << "Robot " << robot->getName() << " at (" << newRow << ", " << newCol << ")" << endl;
+            } else {
+                cout << "Empty at (" << newRow << ", " << newCol << ")" << endl;
+            }
+        }
+    }
 }
 
 // ******************************************************************
