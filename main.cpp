@@ -9,7 +9,7 @@
 using namespace std;
 
 
-int main(){
+int main() {
     srand(time(NULL));
     string fileName = "input.txt";
 
@@ -24,7 +24,7 @@ int main(){
         battlefield.addRobot(gameInfo.robots[i]);
     }
     
-    battlefield.printBattlefield(gameInfo);
+    battlefield.printBattlefield();
 
     return 0;
 }

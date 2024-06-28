@@ -22,7 +22,8 @@ public:
 
     void addRobot(Robot* robot);
     void updateBattlefield();           // update battlefield with robots
-    void printBattlefield(GameInfo& gameInfo);
+    void printBattlefield();
+    Robot* findRobotAtPosition(int posY, int posX) const;
 };
 
 #endif

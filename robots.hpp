@@ -19,7 +19,7 @@ public:
     Robot(const string& type, const string& name, int r, int c);
     
     void parseRobotInfo(const string& line);
-    virtual char getSymbol() const { return symbol; }
+    virtual char getSymbol() const { return 'M'; }
 
     int getPosY() const { return posY; }  // Getter for posY
     int getPosX() const { return posX; }  // Getter for posX
@@ -65,11 +65,12 @@ class SteppingRobot : public virtual Robot{
 
 class RoboCop : public MovingRobot, public SeeingRobot, public ShootingRobot{
     public:
-        char symbol = 'R';
+
+    char getSymbol() const override {
+        return 'R'; // Example symbol for RoboCop
+    }
 
         RoboCop(const string& type, const string& name, int r, int c);
-
-        char getSymbol() const override { return symbol; }
 
         void look(int x, int y) override;
         void move() override;
