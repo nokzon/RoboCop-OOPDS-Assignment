@@ -21,40 +21,56 @@ Battlefield::Battlefield(GameInfo& gameInfo) : gameInfo(gameInfo) {
     }
 }
 
-// check if the given cell has a Robot or not
-bool Battlefield::isRobot(int row, int col) {
-    if (battlefield[row][col] == 'M')
-        return (true);
-    else 
-        return (false);
-}
-
-void Battlefield::printBattlefield(GameInfo& gameInfo) {
-    int i, j;
-    printf("    ");
-
-    for (i = 0; i < gameInfo.N; i++) {
-        if (i < 10) {cout << i << "  ";}
-        else if (i >= 10) {cout << i << " ";}
-    }
-
-    printf("\n");
-
-    for (i = 0; i < gameInfo.M; i++) {
-        if (i < 10) {cout << i << "   ";}
-        else if (i >= 10) {cout << i << "  ";}
-
-        for (j = 0; j < gameInfo.N; j++)
-            printf("%c  ", battlefield[i][j]);
-        printf("\n");
-    }
-    return;        
-}
-
 // destructor implementation
 Battlefield::~Battlefield() {
     for (int i = 0; i <= gameInfo.M; i++) {
         delete[] battlefield[i];
     }
     delete[] battlefield;
+}
+
+void Battlefield::addRobot(Robot* robot) {
+    robots.push_back(robot);
+}
+
+// update battlefield with robots
+void Battlefield::updateBattlefield() {
+    // Reset the battlefield to empty state
+    for (int i = 0; i < gameInfo.M; ++i) {
+        for (int j = 0; j < gameInfo.N; ++j) {
+            battlefield[i][j] = '.';
+        }
+    }
+
+    // Place robots on the battlefield
+    for (Robot* robot : robots) {
+        int posY = robot->getPosY();
+        int posX = robot->getPosX();
+        
+        // Check boundaries
+        if (posY >= 0 && posY < gameInfo.M && posX >= 0 && posX < gameInfo.N) {
+            battlefield[posY][posX] = robot->getSymbol();
+        } else {
+            // Handle out-of-bounds error if necessary
+            cerr << "Robot position out of bounds: (" << posY << ", " << posX << ")" << endl;
+        }
+    }
+}
+
+void Battlefield::printBattlefield(GameInfo& gameInfo) {
+    updateBattlefield(); // Update the battlefield with current robot positions
+
+    std::cout << "    ";
+    for (int i = 0; i < gameInfo.N; ++i) {
+        std::cout << std::setw(3) << i; // Print column numbers
+    }
+    std::cout << "\n";
+
+    for (int i = 0; i < gameInfo.M; ++i) {
+        std::cout << std::setw(3) << i; // Print row numbers
+        for (int j = 0; j < gameInfo.N; ++j) {
+            std::cout << std::setw(3) << battlefield[i][j]; // Print battlefield cells
+        }
+        std::cout << "\n";
+    }
 }

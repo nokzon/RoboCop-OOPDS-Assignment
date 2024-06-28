@@ -18,6 +18,12 @@ int main(){
     gameInfo.printGameInfo();    // Print the parsed information to verify it
 
     Battlefield battlefield(gameInfo);
+
+    // Add robots to the battlefield
+    for (int i = 0; i < gameInfo.robotCount; ++i) {
+        battlefield.addRobot(gameInfo.robots[i]);
+    }
+    
     battlefield.printBattlefield(gameInfo);
 
     return 0;

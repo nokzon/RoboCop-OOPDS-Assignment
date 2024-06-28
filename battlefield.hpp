@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <vector>
 #include "gameinfo.hpp"
 #include "robots.hpp"
 using namespace std;
@@ -13,11 +14,14 @@ class Battlefield {
 private:
     GameInfo gameInfo;
     char** battlefield;                 // 2D array representing the battlefield
+    vector<Robot*> robots;              // List of robots
 
 public:
     Battlefield(GameInfo& gameInfo);    // constructor
     ~Battlefield();                     // destructor
-    bool isRobot(int row, int col);     // check if cell has robot or not
+
+    void addRobot(Robot* robot);
+    void updateBattlefield();           // update battlefield with robots
     void printBattlefield(GameInfo& gameInfo);
 };
 

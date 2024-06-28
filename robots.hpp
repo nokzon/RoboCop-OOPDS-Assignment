@@ -21,6 +21,9 @@ public:
     void parseRobotInfo(const string& line);
     virtual char getSymbol() const { return symbol; }
 
+    int getPosY() const { return posY; }  // Getter for posY
+    int getPosX() const { return posX; }  // Getter for posX
+
     // These are the virtual functions using polymorphism so that each function can have different definitions.
     virtual void look(int x, int y) = 0;
     virtual void move() = 0;
