@@ -5,7 +5,10 @@
 #include "gameinfo.hpp"
 using namespace std;
 
+class GameInfo;
+
 class Robot {
+    GameInfo* gameInfo;
 protected:
     string robotType;
     string robotName;

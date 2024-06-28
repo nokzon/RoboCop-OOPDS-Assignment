@@ -1,6 +1,7 @@
 #include "robots.hpp"
 #include <iostream>
 #include <string>
+#include <cmath>
 using namespace std;
 
 // ******************************************************************
@@ -30,6 +31,14 @@ ShootingRobot::ShootingRobot(const string& type, const string& name, int r, int 
 
 void ShootingRobot::fire(int x, int y)
 {
+    // int shootX = rand() % 21 - 10; // generate X between -10 to 10
+    // int shootY = rand() % 21 - 10;
+
+    // while (abs(shootX) + abs(shootY) > 10 || abs(shootX) + abs(shootY) == 0)
+    // {
+    //     int shootX = rand() % 21 - 10;
+    //     int shootY = rand() % 21 - 10;
+    // }
     // This function targets an element in the battlefield and destroys it if it's not '.'
     // Randomly generates x and y between -10 to 10, if |x| + |y| > 10, or |x| + |y| == 0, generate again
     // Shoots at the x and y coordinate generated relative to the robot's position

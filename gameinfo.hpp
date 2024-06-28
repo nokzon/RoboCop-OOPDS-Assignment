@@ -5,7 +5,7 @@
 #include <vector>
 #include "robots.hpp"
 using namespace std;
-
+class Robot;
 // Information gotten after parsing the initial game text file
 class GameInfo {
 public:
