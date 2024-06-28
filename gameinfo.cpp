@@ -83,6 +83,36 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
         r->printInfo();
         return r;
     }
+    else if (type == "RoboCop"){
+        Robot* r = new RoboCop(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "Terminator"){
+        Robot* r = new Terminator(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "TerminatorRoboCop"){
+        Robot* r = new TerminatorRoboCop(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "BlueThunder"){
+        Robot* r = new BlueThunder(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "RoboTank"){
+        Robot* r = new RoboTank(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
+    else if (type == "UltimateRobot"){
+        Robot* r = new UltimateRobot(type, name, posY, posX);
+        r->printInfo();
+        return r;
+    }
     else if (type != "MadBot"){
         Robot* r = new MadBot(type, name, posY, posX);
         r->printInfo();

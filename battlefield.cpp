@@ -47,7 +47,6 @@ void Battlefield::updateBattlefield() {
     int posY = robot->getPosY();
     int posX = robot->getPosX();
     char symbol = robot->getSymbol();
-    cout << symbol << endl;
     
         // Check boundaries
         if (posY >= 0 && posY < gameInfo.M && posX >= 0 && posX < gameInfo.N) {
