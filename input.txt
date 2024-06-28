@@ -3,6 +3,6 @@ Steps: 50
 Robots: 5
 MadBot Kidd 3 6
 RoboTank Jet 12 1
-Terminator Alpha 35 20
-BlueThunder Beta 20 37
+Terminator Alpha 10 2
+BlueThunder Beta 15 9
 RoboCop Star random random

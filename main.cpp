@@ -9,7 +9,7 @@
 using namespace std;
 
 
-int main(){
+int main() {
     srand(time(NULL));
     string fileName = "input.txt";
 
@@ -18,7 +18,13 @@ int main(){
     gameInfo.printGameInfo();    // Print the parsed information to verify it
 
     Battlefield battlefield(gameInfo);
-    battlefield.printBattlefield(gameInfo);
+
+    // Add robots to the battlefield
+    for (int i = 0; i < gameInfo.robotCount; ++i) {
+        battlefield.addRobot(gameInfo.robots[i]);
+    }
+    
+    battlefield.printBattlefield();
 
     return 0;
 }

@@ -19,7 +19,10 @@ public:
     Robot(const string& type, const string& name, int r, int c);
     
     void parseRobotInfo(const string& line);
-    virtual char getSymbol() const { return symbol; }
+    virtual char getSymbol() const { return 'M'; }
+
+    int getPosY() const { return posY; }  // Getter for posY
+    int getPosX() const { return posX; }  // Getter for posX
 
     // These are the virtual functions using polymorphism so that each function can have different definitions.
     virtual void look(int x, int y) = 0;
@@ -62,11 +65,9 @@ class SteppingRobot : public virtual Robot{
 
 class RoboCop : public MovingRobot, public SeeingRobot, public ShootingRobot{
     public:
-        char symbol = 'R';
-
         RoboCop(const string& type, const string& name, int r, int c);
 
-        char getSymbol() const override { return symbol; }
+        char getSymbol() const override { return 'R'; }
 
         void look(int x, int y) override;
         void move() override;
@@ -77,11 +78,9 @@ class RoboCop : public MovingRobot, public SeeingRobot, public ShootingRobot{
 
 class Terminator : public MovingRobot, public SeeingRobot, public SteppingRobot{
     public:
-        char symbol = 'T';
-
         Terminator(const string& type, const string& name, int r, int c);
         
-        char getSymbol() const override { return symbol; }
+        char getSymbol() const override { return 'T'; }
 
         void look(int x, int y) override;
         void move() override;
@@ -92,11 +91,9 @@ class Terminator : public MovingRobot, public SeeingRobot, public SteppingRobot{
 
 class TerminatorRoboCop : public MovingRobot, public SeeingRobot, public SteppingRobot, public ShootingRobot{
     public:
-        char symbol = 'G';
-
         TerminatorRoboCop(const string& type, const string& name, int r, int c);
-        
-        char getSymbol() const override { return symbol; }
+
+        char getSymbol() const override { return '&'; }
 
         void look(int x, int y) override;
         void move() override;
@@ -107,11 +104,9 @@ class TerminatorRoboCop : public MovingRobot, public SeeingRobot, public Steppin
 
 class BlueThunder : public ShootingRobot{
     public:
-        char symbol = 'B';
-
         BlueThunder(const string& type, const string& name, int r, int c);
         
-        char getSymbol() const override { return symbol; }
+        char getSymbol() const override { return 'B'; }
 
         void look(int x, int y) override;
         void move() override;
@@ -122,11 +117,9 @@ class BlueThunder : public ShootingRobot{
 
 class MadBot : public ShootingRobot{
     public:
-        char symbol = 'M';
-
         MadBot(const string& type, const string& name, int r, int c);
 
-        char getSymbol() const override { return symbol; }
+        char getSymbol() const override { return 'M'; }
 
         void look(int x, int y) override;
         void move() override;
@@ -138,11 +131,9 @@ class MadBot : public ShootingRobot{
 
 class RoboTank : public MovingRobot, public SeeingRobot, public SteppingRobot, public ShootingRobot{
     public:
-        char symbol = 'Y';
-
         RoboTank(const string& type, const string& name, int r, int c);
 
-        char getSymbol() const override { return symbol; }
+        char getSymbol() const override { return 't'; }
 
         void look(int x, int y) override;
         void move() override;
@@ -153,11 +144,9 @@ class RoboTank : public MovingRobot, public SeeingRobot, public SteppingRobot, p
 
 class UltimateRobot : public MovingRobot, public SteppingRobot, public SeeingRobot, public ShootingRobot{
     public:
-        char symbol = 'U';
-
         UltimateRobot(const string& type, const string& name, int r, int c);
 
-        char getSymbol() const override { return symbol; }
+        char getSymbol() const override { return 'U'; }
 
         void look(int x, int y) override;
         void move() override;
