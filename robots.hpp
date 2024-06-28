@@ -2,7 +2,6 @@
 #define robot_h
 
 #include <string>
-#include <iostream>
 #include "gameinfo.hpp"
 using namespace std;
 

@@ -53,14 +53,17 @@ void GameInfo::parseGameGridInfo(const string& line) {
 
 // Parse the number of steps from the input line    
 void GameInfo::parseStepsInfo(const string& line) {
-    this->steps = stoi(line.substr(7)); // Extract the number of steps from the line
+    stringstream s(line);
+    string dummy;
+    s >> dummy >> this->steps;
 }
 
 // Parse the number of robots from the input line
 void GameInfo::parseRobotCountInfo(const string& line) {
-    this->robotCount = stoi(line.substr(8)); // Extract the number of robots from the line
+    stringstream s(line);
+    string dummy;
+    s >> dummy >> this->robotCount;
     this->robots = new Robot*[this->robotCount]; // Allocate memory for the robots array
-    
 }
 
 // Parse the information of each robot
@@ -81,41 +84,49 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
     if (type == "MadBot"){
         Robot* r = new MadBot(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     else if (type == "RoboCop"){
         Robot* r = new RoboCop(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     else if (type == "Terminator"){
         Robot* r = new Terminator(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     else if (type == "TerminatorRoboCop"){
         Robot* r = new TerminatorRoboCop(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     else if (type == "BlueThunder"){
         Robot* r = new BlueThunder(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     else if (type == "RoboTank"){
         Robot* r = new RoboTank(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     else if (type == "UltimateRobot"){
         Robot* r = new UltimateRobot(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     else if (type != "MadBot"){
         Robot* r = new MadBot(type, name, posY, posX);
         r->printInfo();
+        robotStatus(name, type);
         return r;
     }
     // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
@@ -125,17 +136,30 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
     }
 }
 
+// Create a vector pair to store the name and lives of each robot
+void GameInfo::robotStatus(string& name){
+    robotStatusPair.push_back(make_pair(name, 3));
+}
+// TODO: After doing simulation loop make sure the name calling is correct. We might want to store the entire information of robots instead of just the name
+// everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.
+
+void GameInfo::printRobotStatus(){
+    for (size_t i = 0; i < robotStatusPair.size(); ++i){
+        cout << "Pair " << i+1 << ": ";
+        cout << robotStatusPair[i].first << " " << robotStatusPair[i].second << endl;
+    }
+}
+
+// Then create an empty queue that will add robots in if they get hit
+void GameInfo::waitingRobots(string& name){
+    waitingStatusRobot.push_back(name);
+}
+// TODO: In simulation loop, check if robot's still alive, if so then only add it to this vector. Robots that are in this list will be respawned into the 
+// battlefield when it's their turn.
+
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
     cout << "Grid Dimensions: " << this->M << " by " << this->N << endl;
     cout << "Steps: " << this->steps << endl;
     cout << "Number of Robots: " << this->robotCount << endl;
 }
-
-// Function to delete robot objects
-// void GameInfo::deleteRobots() {
-//     for (int i = 0; i < this->robotCount; ++i){
-//         delete this->robots[i];
-//     }
-//     delete[] this->robots;
-// }

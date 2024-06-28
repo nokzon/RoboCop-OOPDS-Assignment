@@ -4,7 +4,6 @@
 #include "battlefield.cpp"
 #include "gameinfo.hpp"
 #include "gameinfo.cpp"
-#include "robots.hpp"
 #include "robots.cpp"
 using namespace std;
 
@@ -16,6 +15,7 @@ int main() {
     GameInfo gameInfo;
     gameInfo.readFile(fileName);
     gameInfo.printGameInfo();    // Print the parsed information to verify it
+    gameInfo.printRobotStatus();
 
     Battlefield battlefield(gameInfo);
 
