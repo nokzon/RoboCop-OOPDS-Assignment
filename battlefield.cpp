@@ -71,7 +71,7 @@ Robot* Battlefield::findRobotAtPosition(int posY, int posX) const {
 void Battlefield::printBattlefield() {
     updateBattlefield(); // Update the battlefield with current robot positions
 
-    std::cout << "    ";
+    std::cout << "   ";
     for (int i = 0; i < gameInfo.N; ++i) {
         std::cout << std::setw(3) << i; // Print column numbers
     }
