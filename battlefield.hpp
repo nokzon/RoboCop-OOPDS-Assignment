@@ -1,10 +1,6 @@
 #ifndef BATTLEFIELD_HPP
 #define BATTLEFIELD_HPP
 
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <fstream>
 #include <vector>
 #include "gameinfo.hpp"
 #include "robots.hpp"

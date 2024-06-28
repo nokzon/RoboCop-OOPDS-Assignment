@@ -2,9 +2,7 @@
 #include "robots.hpp"
 #include "gameinfo.hpp"
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
+#include <iomanip>
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
