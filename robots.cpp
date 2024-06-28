@@ -69,7 +69,7 @@ void SeeingRobot::look(int x, int y)
                 cout << "Robot " << robot->getName() << " at (" << newRow << ", " << newCol << ")" << endl;
             }
             else {
-                cout << "Empty at (" << newRow << ", " << newCol << ")" << endl;
+                // cout << "Empty at (" << newRow << ", " << newCol << ")" << endl;
             }
         }
     }
@@ -95,43 +95,74 @@ RoboCop::RoboCop(const string& type, const string& name, int r, int c)
 
 void RoboCop::look(int x, int y)
 {
-    // Looks at a specific coordinate on the grid, then reveals a 3x3 area around that coordinate
-    // 3x3 area needs to reveal whether parts of it are in battlefield or not, and reveal robot if there's one
+    cout << robotName << " looks around its current position." << endl;
+
+    vector<int> newCoord;
     int dx[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
     int dy[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
+
     for (int d = 0; d < 8; d++) {
-        int newRow = y + dy[d];
-        int newCol = x + dx[d];
+
+        int newRow = posY + dy[d];
+        int newCol = posX + dx[d];
 
         // Check if the new position is within the battlefield
-        if (newRow >= 0 && newRow < gameInfo->M && newCol >= 0 && newCol < gameInfo->N) {
+        if (newRow >= 0 && newRow < gameInfo->M && newCol >= 0 && newCol < gameInfo->N) {    
+            newCoord.clear();
             // Check if there's a robot at the new position
             Robot* robot = battlefield->findRobotAtPosition(newRow, newCol);
             if (robot) {
-                cout << "Robot " << robot->getName() << " at (" << newRow << ", " << newCol << ")" << endl;
+                cout << "Robot " << robot->getName() << " found at (" << newRow << ", " << newCol << ")" << endl;
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableStep.push_back(newCoord);
             }
             else {
-                cout << "Empty at (" << newRow << ", " << newCol << ")" << endl;
+                // cout << "Empty at (" << newRow << ", " << newCol << ")" << endl; // Commented out because it works but is messy
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableLocation.push_back(newCoord);
             }
+        }
+        else {
+            // cout << "(" << newRow << ", " << newCol << ") is out of bounds" << endl; // Commented out, it works but is messy
         }
     }
 }
 
-
 void RoboCop::move() 
 {
-    cout << robotName << " moves to x, y" << endl;
+    int x = rand() % movableLocation.size();
+    posY = movableLocation[x][0];
+    posX = movableLocation[x][1];
+
+    cout << robotName << " moves to (" << posY << ", " << posX << ")" << endl;
 }
 
 void RoboCop::step()
 {
-    cout << robotName << " steps on a robot" << endl;
 }
 
 void RoboCop::fire(int x, int y) 
 {
-    cout << robotName << " does not fire" << endl;
+    if (posY + y < gameInfo->M && posX + x < gameInfo->N) {
+        if (posY + y >= 0 && posX + x >= 0) {
+            Robot* robot = battlefield->findRobotAtPosition(posY + y, posX + x);
+            cout << robotName << " fires at (" << posY + y << ", " << posX + x << ")" << endl;
+            if (robot)
+            {
+                cout << robotName << " hit a robot" << endl;
+                robot->setAliveState(false);
+            }
+        }
+        else {
+            cout << robotName << " fires at an empty location." << endl;
+        }
+    }
+    else {
+        cout << robotName << " fires at an empty location." << endl;
+    }
 }
 
 void RoboCop::printInfo() const 
@@ -148,23 +179,86 @@ Terminator::Terminator(const string& type, const string& name, int r, int c)
 
 void Terminator::look(int x, int y)
 {
-    cout << robotName << " looks at its immediate neighbourhood" << endl;
+    cout << robotName << " looks around its immediate neighbourhood." << endl;
+    
+    vector<int> newCoord;
+    int dx[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+    int dy[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+    for (int d = 0; d < 8; d++) {
+
+        int newRow = posY + dy[d];
+        int newCol = posX + dx[d];
+
+        // Check if the new position is within the battlefield
+        if (newRow >= 0 && newRow < gameInfo->M && newCol >= 0 && newCol < gameInfo->N) {    
+            newCoord.clear();
+            // Check if there's a robot at the new position
+            Robot* robot = battlefield->findRobotAtPosition(newRow, newCol);
+            if (robot) {
+                cout << "Robot " << robot->getName() << " found at (" << newRow << ", " << newCol << ")" << endl;
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableStep.push_back(newCoord);
+            }
+            else {
+                // cout << "Empty at (" << newRow << ", " << newCol << ")" << endl; // Commented out, it works but is messy
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableLocation.push_back(newCoord);
+            }
+        }
+        else {
+            // cout << "(" << newRow << ", " << newCol << ") is out of bounds" << endl; // Commented out, it works but is messy
+        }
+    }
 }
 
 void Terminator::move() 
 {
-    cout << robotName << " moves to x, y" << endl;
+    if (!(movableStep.empty()))
+    {
+        int otherRobotPosX, otherRobotPosY;
+        int x = rand() % movableStep.size();
+        otherRobotPosY = movableStep[x][0];
+        otherRobotPosX = movableStep[x][1];
+
+        Robot* robot = battlefield->findRobotAtPosition(otherRobotPosY, otherRobotPosX);
+        robot->setAliveState(false);
+
+        posY = movableStep[x][0];
+        posX = movableStep[x][1];
+        cout << robotName << " moves to (" << posY << ", " << posX << ")" << endl;
+    }
+    else
+    {
+        int x = rand() % movableLocation.size();
+        posY = movableLocation[x][0];
+        posX = movableLocation[x][1];
+
+        cout << robotName << " moves to (" << posY << ", " << posX << ")" << endl;
+    }
 }
 
 void Terminator::step()
 {
-    cout << robotName << " steps on a robot" << endl;
+    if (!(movableStep.empty()))
+    {
+        cout << robotName << " steps on a robot" << endl;
+        kills++;
+    }
+    else
+    {
+        cout << robotName << " did not step on a robot" << endl;
+    }
 }
 
 void Terminator::fire(int x, int y) 
 {
     cout << robotName << " does not fire" << endl;
 }
+
+void Terminator::fire() {}
 
 void Terminator::printInfo() const 
 {
@@ -180,22 +274,99 @@ TerminatorRoboCop::TerminatorRoboCop(const string& type, const string& name, int
 
 void TerminatorRoboCop::look(int x, int y)
 {
-    cout << robotName << " looks at (" << y << ", " << x << ")" << endl;
+    cout << robotName << " looks around its immediate neighbourhood." << endl;
+    
+    vector<int> newCoord;
+    int dx[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+    int dy[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+    for (int d = 0; d < 8; d++) {
+
+        int newRow = posY + dy[d];
+        int newCol = posX + dx[d];
+
+        // Check if the new position is within the battlefield
+        if (newRow >= 0 && newRow < gameInfo->M && newCol >= 0 && newCol < gameInfo->N) {    
+            newCoord.clear();
+            // Check if there's a robot at the new position
+            Robot* robot = battlefield->findRobotAtPosition(newRow, newCol);
+            if (robot) {
+                cout << "Robot " << robot->getName() << " found at (" << newRow << ", " << newCol << ")" << endl;
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableStep.push_back(newCoord);
+            }
+            else {
+                // cout << "Empty at (" << newRow << ", " << newCol << ")" << endl; // Commented out, it works but is messy
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableLocation.push_back(newCoord);
+            }
+        }
+        else {
+            // cout << "(" << newRow << ", " << newCol << ") is out of bounds" << endl; // Commented out, it works but is messy
+        }
+    }
 }
 
 void TerminatorRoboCop::move() 
 {
-    cout << robotName << " moves to x, y" << endl;
+    if (!(movableStep.empty()))
+    {
+        int otherRobotPosX, otherRobotPosY;
+        int x = rand() % movableStep.size();
+        otherRobotPosY = movableStep[x][0];
+        otherRobotPosX = movableStep[x][1];
+
+        Robot* robot = battlefield->findRobotAtPosition(otherRobotPosY, otherRobotPosX);
+        robot->setAliveState(false);
+
+        posY = movableStep[x][0];
+        posX = movableStep[x][1];
+        cout << robotName << " moves to (" << posY << ", " << posX << ")" << endl;
+    }
+    else
+    {
+        int x = rand() % movableLocation.size();
+        posY = movableLocation[x][0];
+        posX = movableLocation[x][1];
+
+        cout << robotName << " moves to (" << posY << ", " << posX << ")" << endl;
+    }
 }
 
 void TerminatorRoboCop::step()
 {
-    cout << robotName << " steps on a robot" << endl;
+    if (!(movableStep.empty()))
+    {
+        cout << robotName << " steps on a robot" << endl;
+        kills++;
+    }
+    else
+    {
+        cout << robotName << " did not step on a robot" << endl;
+    }
 }
 
 void TerminatorRoboCop::fire(int x, int y) 
 {
-    cout << robotName << " fires at (" << y << ", " << x << ")" << endl;
+    if (posY + y < gameInfo->M && posX + x < gameInfo->N) {
+        if (posY + y >= 0 && posX + x >= 0) {
+            Robot* robot = battlefield->findRobotAtPosition(posY + y, posX + x);
+            cout << robotName << " fires at (" << posY + y << ", " << posX + x << ")" << endl;
+            if (robot)
+            {
+                cout << robotName << " hit a robot" << endl;
+                robot->setAliveState(false);
+            }
+        }
+        else {
+            cout << robotName << " fires at an empty location." << endl;
+        }
+    }
+    else {
+        cout << robotName << " fires at an empty location." << endl;
+    }
 }
 
 void TerminatorRoboCop::printInfo() const 
@@ -222,12 +393,11 @@ void BlueThunder::move()
 
 void BlueThunder::step()
 {
-    cout << robotName << " does not step" << endl;
 }
 
-void BlueThunder::fire(int x, int y) 
+void BlueThunder::fire() 
 {
-    cout << robotName << " fires at the next clockwise direction at (" << y << ", " << x << ")" << endl;
+    cout << robotName << " fires at the next clockwise direction at (" << "y" << ", " << "x" << ")" << endl;
 }
 
 void BlueThunder::printInfo() const 
@@ -253,12 +423,17 @@ void MadBot::move()
 
 void MadBot::step()
 {
-    cout << robotName << " does not step" << endl;
 }
 
-void MadBot::fire(int x, int y) 
+void MadBot::fire() 
 {
-    cout << robotName << " fires at (" << y << ", " << x << ")" << endl;
+    int shootY = rand() % 3 - 1;
+    int shootX = rand() % 3 - 1;
+    while (abs(shootY) + abs(shootX) == 0) {
+        shootY = rand() % 3 - 1;
+        shootX = rand() % 3 - 1;
+    }
+    cout << robotName << " fires at (" << shootY << ", " << shootX << ")" << endl;
 }
 
 void MadBot::printInfo() const 
@@ -285,12 +460,19 @@ void RoboTank::move()
 
 void RoboTank::step()
 {
-    cout << robotName << " does not step" << endl;
 }
 
-void RoboTank::fire(int x, int y) 
+void RoboTank::fire() 
 {
-    cout << robotName << " fires at (" << y << ", " << x << ")" << endl;
+    int shootY = rand() % gameInfo->M;
+    int shootX = rand() % gameInfo->N;
+    cout << robotName << " fires at (" << shootY << ", " << shootX << ")" << endl;
+    Robot* robot = battlefield->findRobotAtPosition(shootY, shootX);
+    if (robot)
+    {
+        cout << robotName << " hit a robot" << endl;
+        robot->setAliveState(false);
+    }
 }
 
 void RoboTank::printInfo() const 
@@ -307,22 +489,91 @@ UltimateRobot::UltimateRobot(const string& type, const string& name, int r, int 
 
 void UltimateRobot::look(int x, int y)
 {
-    cout << robotName << " looks at (" << y << ", " << x << ")" << endl;
+    cout << robotName << " looks around its immediate neighbourhood." << endl;
+    
+    vector<int> newCoord;
+    int dx[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+    int dy[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+    for (int d = 0; d < 8; d++) {
+
+        int newRow = posY + dy[d];
+        int newCol = posX + dx[d];
+
+        // Check if the new position is within the battlefield
+        if (newRow >= 0 && newRow < gameInfo->M && newCol >= 0 && newCol < gameInfo->N) {    
+            newCoord.clear();
+            // Check if there's a robot at the new position
+            Robot* robot = battlefield->findRobotAtPosition(newRow, newCol);
+            if (robot) {
+                cout << "Robot " << robot->getName() << " found at (" << newRow << ", " << newCol << ")" << endl;
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableStep.push_back(newCoord);
+            }
+            else {
+                // cout << "Empty at (" << newRow << ", " << newCol << ")" << endl; // Commented out, it works but is messy
+                newCoord.push_back(newRow);
+                newCoord.push_back(newCol);
+                movableLocation.push_back(newCoord);
+            }
+        }
+        else {
+            // cout << "(" << newRow << ", " << newCol << ") is out of bounds" << endl; // Commented out, it works but is messy
+        }
+    }
 }
 
 void UltimateRobot::move() 
 {
-    cout << robotName << " moves to x, y" << endl;
+    if (!(movableStep.empty()))
+    {
+        int otherRobotPosX, otherRobotPosY;
+        int x = rand() % movableStep.size();
+        otherRobotPosY = movableStep[x][0];
+        otherRobotPosX = movableStep[x][1];
+
+        Robot* robot = battlefield->findRobotAtPosition(otherRobotPosY, otherRobotPosX);
+        robot->setAliveState(false);
+
+        posY = movableStep[x][0];
+        posX = movableStep[x][1];
+        cout << robotName << " moves to (" << posY << ", " << posX << ")" << endl;
+    }
+    else
+    {
+        int x = rand() % movableLocation.size();
+        posY = movableLocation[x][0];
+        posX = movableLocation[x][1];
+
+        cout << robotName << " moves to (" << posY << ", " << posX << ")" << endl;
+    }
 }
 
 void UltimateRobot::step()
 {
-    cout << robotName << " steps on a robot" << endl;
+    if (!(movableStep.empty()))
+    {
+        cout << robotName << " steps on a robot" << endl;
+        kills++;
+    }
+    else
+    {
+        cout << robotName << " did not step on a robot" << endl;
+    }
 }
 
-void UltimateRobot::fire(int x, int y) 
+void UltimateRobot::fire() 
 {
-    cout << robotName << " fires at (" << y << ", " << x << ")" << endl;
+    int shootY = rand() % gameInfo->M;
+    int shootX = rand() % gameInfo->N;
+    cout << robotName << " fires at (" << shootY << ", " << shootX << ")" << endl;
+    Robot* robot = battlefield->findRobotAtPosition(shootY, shootX);
+    if (robot)
+    {
+        cout << robotName << " hit a robot" << endl;
+        robot->setAliveState(false);
+    }
 }
 
 void UltimateRobot::printInfo() const 

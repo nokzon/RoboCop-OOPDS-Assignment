@@ -57,15 +57,29 @@ void Battlefield::updateBattlefield() {
     }
 }
 
-
 Robot* Battlefield::findRobotAtPosition(int posY, int posX) const {
     for (Robot* robot : robots) {
         if (robot->getPosY() == posY && robot->getPosX() == posX) {
-            return robot;
+            if (robot->isAlive()) {
+                return robot;
+            }
         }
     }
     return nullptr;
 }
+
+// bool Battlefield::hasTwoRobots(int posY, int posX) const {
+//     int count;
+//     for (Robot* robot : robots) {
+//         if (robot->getPosY() == posY && robot->getPosX() == posX) {
+//             count++;
+//         }
+//     }
+//     if (count > 1)
+//         return true;
+//     else
+//         return false;
+// }
 
 void Battlefield::printBattlefield() {
     updateBattlefield(); // Update the battlefield with current robot positions
