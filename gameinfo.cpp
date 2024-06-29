@@ -147,6 +147,7 @@ bool GameInfo::checkRobotLives(const string& name){
         cerr << "Error: Robot " << name << " not found in robotLivesPair vector." << endl;
         return false;
     }
+    return false;
 }
 
 // Function that deducts one life from a robot and checks if it still has lives remaining
