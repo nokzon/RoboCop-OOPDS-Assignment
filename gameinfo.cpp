@@ -7,6 +7,7 @@
 #include <sstream>
 #include <cmath>
 #include <cstdlib>
+#include <algorithm>
 using namespace std; 
 
 // Function that reads tne input file and parses the information
@@ -81,72 +82,77 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
         posX = stoi(posXStr);
     }
 
+    Robot* r = nullptr;
+
     if (type == "MadBot"){
-        Robot* r = new MadBot(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new MadBot(type, name, posY, posX);
     }
     else if (type == "RoboCop"){
-        Robot* r = new RoboCop(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new RoboCop(type, name, posY, posX);
     }
     else if (type == "Terminator"){
-        Robot* r = new Terminator(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new Terminator(type, name, posY, posX);
     }
     else if (type == "TerminatorRoboCop"){
-        Robot* r = new TerminatorRoboCop(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new TerminatorRoboCop(type, name, posY, posX);
     }
     else if (type == "BlueThunder"){
-        Robot* r = new BlueThunder(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new BlueThunder(type, name, posY, posX);
     }
     else if (type == "RoboTank"){
-        Robot* r = new RoboTank(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new RoboTank(type, name, posY, posX);
     }
     else if (type == "UltimateRobot"){
-        Robot* r = new UltimateRobot(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new UltimateRobot(type, name, posY, posX);
     }
     else if (type != "MadBot"){
         Robot* r = new MadBot(type, name, posY, posX);
+    }
+
+    if (r) {
         r->printInfo();
-        robotStatus(name);
+        robotVector.push_back(r); // Store robot object in the vector
+        robotLives(r); // Pass robot object o then be used and get name from class
         return r;
     }
-    // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
-
-    else{
+    else {
         throw runtime_error("Unknown robot type!");
     }
 }
 
 // Create a vector pair to store the name and lives of each robot
-void GameInfo::robotStatus(string& name){
-    robotStatusPair.push_back(make_pair(name, 3));
+void GameInfo::robotLives(Robot* robot){
+    robotLivesPair.push_back(make_pair(robot->getName(), 3));
 }
 // TODO: After doing simulation loop make sure the name calling is correct. We might want to store the entire information of robots instead of just the name
 // everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.
 
+// Function to check if a robot exists and deduct its lives
+// void GameInfo::checkRobotLives(const string& name){
+//     // Define the lambda function
+//     auto findRobotByName = [&name](const pair<string, int>& p) {
+//         return p.first == name;
+//     };
+
+//     auto it = find_if(robotLivesPair.begin(), robotLivesPair.end(), findRobotByName);
+
+//     if (it != robotLivesPair.end()) {
+//         if (it->second >= 0) {
+//             it->second -= 1;
+//         }
+//         else {
+//             cout << "Robot " << name << " has no lives remaining." << endl;
+//         }
+//     }
+//     else {
+//         cerr << "Error: Robot " << name << " not found in robotLivesPair vector." << endl;
+//     }
+// }
+
 void GameInfo::printRobotStatus(){
-    for (size_t i = 0; i < robotStatusPair.size(); ++i){
+    for (size_t i = 0; i < robotLivesPair.size(); ++i){
         cout << "Pair " << i+1 << ": ";
-        cout << robotStatusPair[i].first << " " << robotStatusPair[i].second << endl;
+        cout << robotLivesPair[i].first << " " << robotLivesPair[i].second << endl;
     }
 }
 

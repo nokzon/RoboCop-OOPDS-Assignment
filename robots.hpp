@@ -15,7 +15,7 @@ protected:
     string robotName;
     int posY;
     int posX;
-    int lives = 0;
+    int lives = 3;
     char symbol = 'X';
     int kills = 0;
     bool alive = true;
@@ -31,7 +31,11 @@ public:
     void parseRobotInfo(const string& line);
     virtual char getSymbol() const { return 'M'; }
     bool isAlive() { return alive; }
-    void setAliveState(bool state) { alive = state; }
+    void toggleAliveState() { alive = !alive; }
+    int getLives() { return lives; }
+    void reduceLives() { lives--; }
+    void setPosY(int y) { posY = y; }
+    void setPosX(int x) { posX = x; }
 
     int getPosY() const { return posY; }  // Getter for posY
     int getPosX() const { return posX; }  // Getter for posX
@@ -87,6 +91,7 @@ class RoboCop : public MovingRobot, public SeeingRobot, public ShootingRobot{
         void look(int x, int y) override;
         void move() override;
         void step() override;
+        void fire() override;
         void fire(int x, int y) override;
         void printInfo() const override;
 };
@@ -114,11 +119,13 @@ class TerminatorRoboCop : public MovingRobot, public SeeingRobot, public Steppin
         void look(int x, int y) override;
         void move() override;
         void step() override;
+        void fire() override;
         void fire(int x, int y) override;
         void printInfo() const override;
 };
 
 class BlueThunder : public ShootingRobot{
+    int count = 0;
     public:
         BlueThunder(const string& type, const string& name, int r, int c);
         
@@ -128,6 +135,7 @@ class BlueThunder : public ShootingRobot{
         void move() override;
         void step() override;
         void fire() override;
+        void fire(int x, int y) override;
         void printInfo() const override;
 };
 
@@ -141,6 +149,7 @@ class MadBot : public ShootingRobot{
         void move() override;
         void step() override;
         void fire() override;
+        void fire(int x, int y) override;
         void printInfo() const override;
         // TODO: Once value return, we can pass it into the action classes to perform
 };
@@ -155,6 +164,7 @@ class RoboTank : public MovingRobot, public SeeingRobot, public SteppingRobot, p
         void move() override;
         void step() override;
         void fire() override;
+        void fire(int x, int y) override;
         void printInfo() const override;
 };
 
@@ -168,6 +178,7 @@ class UltimateRobot : public MovingRobot, public SteppingRobot, public SeeingRob
         void move() override;
         void step() override;
         void fire() override;
+        void fire(int x, int y) override;
         void printInfo() const override;
 };
 
