@@ -50,25 +50,44 @@ int main() {
         cout << endl << endl << "Steps: " << i + 1 << endl;
         battlefield.updateBattlefield();        
         battlefield.printBattlefield();
+        for (int i = 0; i < gameInfo.robotCount; ++i)
+        {
+            Robot* robot = battlefield.getRobot(i);
+            robot->look(0, 0);
+            robot->move();
+            robot->step();
+            robot->fire();
+            // This would work but some functions might not work
+            // i.e. some robots use fire(x, y) instead of fire()
+            // best approach is honestly to just fix fire to have one function lol
+        }
+        // Madbot
+        Kidd->look(0, 0);
+        Kidd->move();
+        Kidd->step();
+        Kidd->fire();
 
-        // Kidd->look(0, 0);
-        // Kidd->move();
-        // Kidd->step();
-        // Kidd->fire();
-        // Jet->look(0, 0);
-        // Jet->move();
-        // Jet->step();
-        // Jet->fire(x, y);
+        // RoboTank
+        Jet->look(0, 0);
+        Jet->move();
+        Jet->step();
+        Jet->fire();
+
+        // Terminator
         Alpha->look(0, 0);
         Alpha->move();
         Alpha->step();
-        // Alpha->fire(x, y);
-        // Beta->look(0, 0);
-        // Beta->move();
-        // Beta->step();
-        // Beta->fire();
+        Alpha->fire(0, 0);
+
+        // BlueThunder
+        Beta->look(0, 0);
+        Beta->move();
+        Beta->step();
+        Beta->fire();
+
+        // RoboCop
         Star->look(0, 0);
-        // Star->move();
+        Star->move();
         Star->step();
 
         // this is the entire flow for a robocop's fire
