@@ -34,6 +34,8 @@ public:
     void toggleAliveState() { alive = !alive; }
     int getLives() { return lives; }
     void reduceLives() { lives--; }
+    void setPosY(int y) { posY = y; }
+    void setPosX(int x) { posX = x; }
 
     int getPosY() const { return posY; }  // Getter for posY
     int getPosX() const { return posX; }  // Getter for posX

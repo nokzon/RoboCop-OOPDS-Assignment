@@ -59,8 +59,14 @@ int main() {
                     robot = nullptr;
                 }
                 else {
-                    robot->toggleAliveState();
-                    // respawn robot;
+                    int newPosY = rand() % gameInfo.M;
+                    int newPosX = rand() % gameInfo.N;
+                    if (!(battlefield.findRobotAtPosition(newPosY, newPosX))) {
+                        robot->setPosY(newPosY);
+                        robot->setPosX(newPosX);
+                        robot->toggleAliveState();
+                        cout << robot->getName() << " respawned at (" << newPosY << ", " << newPosX << ")" << endl;
+                    }
                 }
             }
             if (robot) {

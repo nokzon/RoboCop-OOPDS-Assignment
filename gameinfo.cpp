@@ -113,6 +113,7 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
         r->printInfo();
         robotVector.push_back(r); // Store robot object in the vector
         robotLives(r); // Pass robot object o then be used and get name from class
+        return r;
     }
     else {
         throw runtime_error("Unknown robot type!");
@@ -127,26 +128,26 @@ void GameInfo::robotLives(Robot* robot){
 // everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.
 
 // Function to check if a robot exists and deduct its lives
-void GameInfo::checkRobotLives(const string& name){
-    // Define the lambda function
-    auto findRobotByName = [&name](const pair<string, int>& p) {
-        return p.first == name;
-    };
+// void GameInfo::checkRobotLives(const string& name){
+//     // Define the lambda function
+//     auto findRobotByName = [&name](const pair<string, int>& p) {
+//         return p.first == name;
+//     };
 
-    auto it = find_if(robotLivesPair.begin(), robotLivesPair.end(), findRobotByName);
+//     auto it = find_if(robotLivesPair.begin(), robotLivesPair.end(), findRobotByName);
 
-    if (it != robotLivesPair.end()) {
-        if (it->second >= 0) {
-            it->second -= 1;
-        }
-        else {
-            cout << "Robot " << name << " has no lives remaining." << endl;
-        }
-    }
-    else {
-        cerr << "Error: Robot " << name << " not found in robotLivesPair vector." << endl;
-    }
-}
+//     if (it != robotLivesPair.end()) {
+//         if (it->second >= 0) {
+//             it->second -= 1;
+//         }
+//         else {
+//             cout << "Robot " << name << " has no lives remaining." << endl;
+//         }
+//     }
+//     else {
+//         cerr << "Error: Robot " << name << " not found in robotLivesPair vector." << endl;
+//     }
+// }
 
 void GameInfo::printRobotStatus(){
     for (size_t i = 0; i < robotLivesPair.size(); ++i){
