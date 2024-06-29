@@ -43,13 +43,15 @@ void Battlefield::updateBattlefield() {
 
     // Place robots on the battlefield
     for (Robot* robot : robots) {
-    int posY = robot->getPosY();
-    int posX = robot->getPosX();
-    char symbol = robot->getSymbol();
+        int posY = robot->getPosY();
+        int posX = robot->getPosX();
+        char symbol = robot->getSymbol();
     
         // Check boundaries
         if (posY >= 0 && posY < gameInfo.M && posX >= 0 && posX < gameInfo.N) {
-            battlefield[posY][posX] = symbol;
+            if (robot->isAlive()) {
+                battlefield[posY][posX] = symbol;
+            }
         } else {
             // Handle out-of-bounds error if necessary
             cerr << "Robot position out of bounds: (" << posY << ", " << posX << ")" << endl;
