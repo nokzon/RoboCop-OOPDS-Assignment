@@ -7,25 +7,30 @@
 #include "robots.cpp"
 using namespace std;
 
+int main()
+{
 
-int main() {
     srand(time(NULL));
     string fileName = "input.txt";
+    int aliveBotCounter = 0;
+
 
     GameInfo gameInfo;
     gameInfo.readFile(fileName);
-    gameInfo.printGameInfo();    // Print the parsed information to verify it
+    gameInfo.printGameInfo(); // Print the parsed information to verify it
     gameInfo.printRobotStatus();
 
     Battlefield battlefield(gameInfo);
 
+
     // Add robots to the battlefield
-    for (int i = 0; i < gameInfo.robotCount; ++i) {
+    for (int i = 0; i < gameInfo.robotCount; ++i)
+    {
         battlefield.addRobot(gameInfo.robots[i]);
         battlefield.getRobot(i)->setGrid(battlefield);
         battlefield.getRobot(i)->setGameInfo(gameInfo);
     }
-    
+
     cout << "Initial battlefield: " << endl;
     battlefield.printBattlefield();
     // Robot* Kidd = battlefield.getRobot(0);
@@ -46,29 +51,37 @@ int main() {
     // Beta->setGameInfo(gameInfo);
     // Star->setGameInfo(gameInfo);
 
-    for (int i = 0; i < gameInfo.steps; ++i) {
-        cout << endl << endl << "Steps: " << i + 1 << endl;
-        battlefield.updateBattlefield();        
+    for (int i = 0; i < gameInfo.steps; ++i)
+    {
+        cout << endl
+             << endl
+             << "Steps: " << i + 1 << endl;
+        battlefield.updateBattlefield();
         battlefield.printBattlefield();
         for (int i = 0; i < gameInfo.robotCount; ++i)
         {
-            Robot* robot = battlefield.getRobot(i);
-            if (!(robot->isAlive())) {
+            Robot *robot = battlefield.getRobot(i);
+            if (!(robot->isAlive()))
+            {
                 robot->reduceLives();
-                if (robot->getLives() == 0) {
+                if (robot->getLives() == 0)
+                {
                     robot = nullptr;
                 }
-                else {
+                else
+                {
                     robot->toggleAliveState();
                     // respawn robot;
                 }
             }
-            if (robot) {
+            if (robot)
+            {
                 robot->look(0, 0);
                 robot->move();
                 robot->step();
                 robot->fire();
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++)
+                {
                     int shootX = rand() % 21 - 10; // generate X between -10 to 10
                     int shootY = rand() % 21 - 10;
 
@@ -82,6 +95,61 @@ int main() {
             }
         }
     }
+    //Simulation Ended
 
-    return 0;
+   
+    cout<<"-------------------------------------------------------"<<endl;
+    cout << " ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼" << endl;
+    cout << " ███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀" << endl;
+    cout << " ██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼█┼┼┼██┼██┼┼┼" << endl;
+    cout << " ██┼┼┼▄▄▄┼██▄▄▄▄▄██┼██┼┼┼▀┼┼┼██┼██▀▀▀" << endl;
+    cout << " ██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██┼┼┼" << endl;
+    cout << " ███▄▄▄██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██▄▄▄" << endl;
+    cout << " ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼" << endl;
+    cout << " ███▀▀▀███┼▀███┼┼██▀┼██▀▀▀┼██▀▀▀▀██▄┼" << endl;
+    cout << " ██┼┼┼┼┼██┼┼┼██┼┼██┼┼██┼┼┼┼██┼┼┼┼┼██┼" << endl;
+    cout << " ██┼┼┼┼┼██┼┼┼██┼┼██┼┼██▀▀▀┼██▄▄▄▄▄▀▀┼" << endl;
+    cout << " ██┼┼┼┼┼██┼┼┼██┼┼█▀┼┼██┼┼┼┼██┼┼┼┼┼██┼" << endl;
+    cout << " ███▄▄▄███┼┼┼─▀█▀┼┼─┼██▄▄▄┼██┼┼┼┼┼██▄" << endl;
+    cout << " ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼" << endl;
+    cout<<"-------------------------------------------------------"<<endl;
+    
+   
+
+    for (int i = 0; i < 5; ++i){
+
+        Robot *robot = battlefield.getRobot(i);
+        //Check if Bot is Alive or Dead ☠️
+
+        if (robot->isAlive()){
+            cout << "Bot ";
+            cout << robot->getName();
+            cout << " is Alive" << endl;
+            aliveBotCounter++;
+        }
+
+        else{
+            cout << "Bot ";
+            cout << robot->getName();
+            cout << " is Dead " << endl;
+        }
+    }
+
+    cout << "------------------------Summary------------------------" << endl;
+
+    if (aliveBotCounter > 1){
+        cout << "Game is Draw" << endl;
+    }
+
+    else if (aliveBotCounter == 1){
+        for (int i = 0; i < 5; ++i){
+
+            Robot *robot = battlefield.getRobot(i);
+            if (robot->isAlive()){
+                cout << "Bot ";
+                cout << robot->getName();
+                cout << "WON! ";
+            }
+        }
+    }
 }
