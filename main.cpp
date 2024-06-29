@@ -44,41 +44,46 @@ int main() {
     Beta->setGameInfo(gameInfo);
     Star->setGameInfo(gameInfo);
 
-    // Kidd->look(0, 0);
-    // Kidd->move();
-    // Kidd->step();
-    // Kidd->fire();
-    // Jet->look(0, 0);
-    // Jet->move();
-    // Jet->step();
-    // Jet->fire(x, y);
-    Alpha->look(0, 0);
-    Alpha->move();
-    Alpha->step();
-    // Alpha->fire(x, y);
-    // Beta->look(0, 0);
-    // Beta->move();
-    // Beta->step();
-    // Beta->fire();
-    Star->look(0, 0);
-    // Star->move();
-    Star->step();
 
-    // this is the entire flow for a robocop's fire
-    for (int i = 0; i < 3; i++) {
-        int shootX = rand() % 21 - 10; // generate X between -10 to 10
-        int shootY = rand() % 21 - 10;
+    for (int i = 0; i < gameInfo.steps; ++i) {
 
-        while (abs(shootX) + abs(shootY) > 10 || abs(shootX) + abs(shootY) == 0)
-        {
-            shootX = rand() % 21 - 10;
-            shootY = rand() % 21 - 10;
+        cout << endl << endl << "Steps: " << i + 1 << endl;
+        battlefield.updateBattlefield();        
+        battlefield.printBattlefield();
+
+        // Kidd->look(0, 0);
+        // Kidd->move();
+        // Kidd->step();
+        // Kidd->fire();
+        // Jet->look(0, 0);
+        // Jet->move();
+        // Jet->step();
+        // Jet->fire(x, y);
+        Alpha->look(0, 0);
+        Alpha->move();
+        Alpha->step();
+        // Alpha->fire(x, y);
+        // Beta->look(0, 0);
+        // Beta->move();
+        // Beta->step();
+        // Beta->fire();
+        Star->look(0, 0);
+        // Star->move();
+        Star->step();
+
+        // this is the entire flow for a robocop's fire
+        for (int i = 0; i < 3; i++) {
+            int shootX = rand() % 21 - 10; // generate X between -10 to 10
+            int shootY = rand() % 21 - 10;
+
+            while (abs(shootX) + abs(shootY) > 10 || abs(shootX) + abs(shootY) == 0)
+            {
+                shootX = rand() % 21 - 10;
+                shootY = rand() % 21 - 10;
+            }
+            Star->fire(shootX, shootY);
         }
-        Star->fire(shootX, shootY);
     }
-
-    battlefield.updateBattlefield();
-    battlefield.printBattlefield();
 
     return 0;
 }

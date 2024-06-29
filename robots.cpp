@@ -180,6 +180,8 @@ Terminator::Terminator(const string& type, const string& name, int r, int c)
 void Terminator::look(int x, int y)
 {
     cout << robotName << " looks around its immediate neighbourhood." << endl;
+    movableStep.clear();
+    movableLocation.clear();
     
     vector<int> newCoord;
     int dx[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
