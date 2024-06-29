@@ -7,6 +7,7 @@
 #include <sstream>
 #include <cmath>
 #include <cstdlib>
+#include <algorithm>
 using namespace std; 
 
 // Function that reads tne input file and parses the information
@@ -96,7 +97,7 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
         r = new TerminatorRoboCop(type, name, posY, posX);
     }
     else if (type == "BlueThunder"){
-       r = new BlueThunder(type, name, posY, posX);
+        r = new BlueThunder(type, name, posY, posX);
     }
     else if (type == "RoboTank"){
         r = new RoboTank(type, name, posY, posX);
@@ -113,21 +114,45 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
 
     r->printInfo();
     robotVector.push_back(r); // Store robot pointer in the vector
-    robotStatus(r); // Pass robot object to then be used and get name from class
+    robotLives(r); // Pass robot object to then be used and get name from class
     return r;
 }
 
 // Create a vector pair to store the name and lives of each robot
-void GameInfo::robotStatus(Robot* robot){
-    robotStatusPair.push_back(make_pair(robot->getName(), 3));
+void GameInfo::robotLives(Robot* robot){
+    robotLivesPair.push_back(make_pair(robot->getName(), 3));
 }
 // TODO: After doing simulation loop make sure the name calling is correct. We might want to store the entire information of robots instead of just the name
 // everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.
 
+// Function that minus one lives in robotStatus
+void GameInfo::deductRobotLives(const string& name){
+    // Define the lambda function
+    auto findRobotByName = [&name](const pair<string, int>& p) {
+        return p.first == name;
+    };
+
+    auto it = find_if(robotLivesPair.begin(), robotLivesPair.end(), findRobotByName);
+
+    if (it != robotLivesPair.end()) {
+        if (it->second >= 0) {
+            it->second -= 1;
+        }
+        if (it->second <= 0) {
+            // Handle robot death if necessary
+            cout << "Robot " << name << " has been destroyed." << endl;
+            // You can also choose to remove the robot from the vector if needed
+        }
+    }
+    else {
+        cerr << "Error: Robot " << name << " not found in robotLivesPair vector." << endl;
+    }
+}
+
 void GameInfo::printRobotStatus(){
-    for (size_t i = 0; i < robotStatusPair.size(); ++i){
+    for (size_t i = 0; i < robotLivesPair.size(); ++i){
         cout << "Pair " << i+1 << ": ";
-        cout << robotStatusPair[i].first << " " << robotStatusPair[i].second << endl;
+        cout << robotLivesPair[i].first << " " << robotLivesPair[i].second << endl;
     }
 }
 

@@ -18,7 +18,7 @@ public:
     // robotInfo* robots;  // Pointer to array for robot info  
     
     vector<Robot*> robotVector;
-    vector<pair<string, int>> robotStatusPair;
+    vector<pair<string, int>> robotLivesPair;
     vector<string> waitingStatusRobot;
 
     friend class Battlefield;
@@ -31,7 +31,8 @@ public:
     Robot* parseRobotInfo(const string& line, const GameInfo& gameInfo);
     void printGameInfo();
     void deleteRobots();
-    void robotStatus(Robot* robot);
+    void robotLives(Robot* robot);
+    void deductRobotLives(const string& name);
     void printRobotStatus();
     void waitingRobots(string& name);
 };
