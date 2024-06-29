@@ -81,64 +81,45 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
         posX = stoi(posXStr);
     }
 
+    Robot* r = nullptr;
+
     if (type == "MadBot"){
-        Robot* r = new MadBot(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new MadBot(type, name, posY, posX);
     }
     else if (type == "RoboCop"){
-        Robot* r = new RoboCop(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new RoboCop(type, name, posY, posX);
     }
     else if (type == "Terminator"){
-        Robot* r = new Terminator(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new Terminator(type, name, posY, posX);
     }
     else if (type == "TerminatorRoboCop"){
-        Robot* r = new TerminatorRoboCop(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new TerminatorRoboCop(type, name, posY, posX);
     }
     else if (type == "BlueThunder"){
-        Robot* r = new BlueThunder(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+       r = new BlueThunder(type, name, posY, posX);
     }
     else if (type == "RoboTank"){
-        Robot* r = new RoboTank(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new RoboTank(type, name, posY, posX);
     }
     else if (type == "UltimateRobot"){
-        Robot* r = new UltimateRobot(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new UltimateRobot(type, name, posY, posX);
     }
     else if (type != "MadBot"){
-        Robot* r = new MadBot(type, name, posY, posX);
-        r->printInfo();
-        robotStatus(name);
-        return r;
+        r = new MadBot(type, name, posY, posX);
     }
-    // TODO: It will call the specific robot class for instance then it will slowly inherit all the way up to base class. 
-
-    else{
+    else {
         throw runtime_error("Unknown robot type!");
     }
+
+    r->printInfo();
+    robotVector.push_back(r); // Store robot pointer in the vector
+    robotStatus(r); // Pass robot object to then be used and get name from class
+    return r;
 }
 
 // Create a vector pair to store the name and lives of each robot
-void GameInfo::robotStatus(string& name){
-    robotStatusPair.push_back(make_pair(name, 3));
+void GameInfo::robotStatus(Robot* robot){
+    robotStatusPair.push_back(make_pair(robot->getName(), 3));
 }
 // TODO: After doing simulation loop make sure the name calling is correct. We might want to store the entire information of robots instead of just the name
 // everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.

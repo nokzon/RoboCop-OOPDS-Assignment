@@ -17,6 +17,7 @@ public:
     string type, name, posYStr, posXStr;
     // robotInfo* robots;  // Pointer to array for robot info  
     
+    vector<Robot*> robotVector;
     vector<pair<string, int>> robotStatusPair;
     vector<string> waitingStatusRobot;
 
@@ -30,7 +31,7 @@ public:
     Robot* parseRobotInfo(const string& line, const GameInfo& gameInfo);
     void printGameInfo();
     void deleteRobots();
-    void robotStatus(string& name);
+    void robotStatus(Robot* robot);
     void printRobotStatus();
     void waitingRobots(string& name);
 };
