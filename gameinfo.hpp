@@ -32,6 +32,7 @@ public:
     void printGameInfo();
     void deleteRobots();
     void robotLives(Robot* robot);
+    bool checkRobotLives(const string& name);
     void deductRobotLives(const string& name);
     void printRobotStatus();
     void waitingRobots(string& name);

@@ -125,8 +125,8 @@ void GameInfo::robotLives(Robot* robot){
 // TODO: After doing simulation loop make sure the name calling is correct. We might want to store the entire information of robots instead of just the name
 // everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.
 
-// Function that minus one lives in robotStatus
-void GameInfo::deductRobotLives(const string& name){
+// Function to check if a robot exists and deduct its lives
+bool GameInfo::checkRobotLives(const string& name){
     // Define the lambda function
     auto findRobotByName = [&name](const pair<string, int>& p) {
         return p.first == name;
@@ -138,14 +138,24 @@ void GameInfo::deductRobotLives(const string& name){
         if (it->second >= 0) {
             it->second -= 1;
         }
-        if (it->second <= 0) {
-            // Handle robot death if necessary
-            cout << "Robot " << name << " has been destroyed." << endl;
-            // You can also choose to remove the robot from the vector if needed
+        else {
+            cout << "Robot " << name << " has no lives remaining." << endl;
+            return false; // Robot has no lives left
         }
     }
     else {
         cerr << "Error: Robot " << name << " not found in robotLivesPair vector." << endl;
+        return false;
+    }
+}
+
+// Function that deducts one life from a robot and checks if it still has lives remaining
+void GameInfo::deductRobotLives(const string& name) {
+    bool hasLives = checkRobotLives(name);
+
+    if (!hasLives) {
+        // Handle the case where the robot has no lives left or is not found
+        // You may choose to remove it from other data structures or handle accordingly
     }
 }
 
