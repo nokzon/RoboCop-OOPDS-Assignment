@@ -47,29 +47,47 @@ int main() {
     // Star->setGameInfo(gameInfo);
 
     for (int i = 0; i < gameInfo.steps; ++i) {
+        if (battlefield.checkOneRobotAlive()) {
+            break;
+        }
         cout << endl << endl << "Steps: " << i + 1 << endl;
         battlefield.updateBattlefield();        
         battlefield.printBattlefield();
+
         for (int i = 0; i < gameInfo.robotCount; ++i)
         {
-            Robot* robot = battlefield.getRobot(i);
-            if (!(robot->isAlive())) {
+            Robot* robot = battlefield.getRobot(i);          
+            if (!(robot->isAlive())) { // check robot alive
                 robot->reduceLives();
-                if (robot->getLives() == 0) {
+                if (robot->getLives() <= 0) { // kill robot when lives = 0
                     robot = nullptr;
                 }
-                else {
-                    int newPosY = rand() % gameInfo.M;
-                    int newPosX = rand() % gameInfo.N;
+                else { // respawns robot
+                    // int newPosY = rand() % gameInfo.M;
+                    // int newPosX = rand() % gameInfo.N;
+                    int newPosY = 12; // to test for one robot alive and upgrading robot
+                    int newPosX = 1; // to test for one robot alive and upgrading robot
                     if (!(battlefield.findRobotAtPosition(newPosY, newPosX))) {
                         robot->setPosY(newPosY);
                         robot->setPosX(newPosX);
                         robot->toggleAliveState();
                         cout << robot->getName() << " respawned at (" << newPosY << ", " << newPosX << ")" << endl;
                     }
+                    else { // start test case to test for one robot alive and upgrading robot
+                        newPosY = 13;
+                        newPosX = 1;
+                        robot->setPosY(newPosY);
+                        robot->setPosX(newPosX);
+                        robot->toggleAliveState();
+                        cout << robot->getName() << " respawned at (" << newPosY << ", " << newPosX << ")" << endl;
+                    } // end test case to test for one robot alive and upgrading robot
                 }
             }
-            if (robot) {
+            if (robot) {           
+                // if (robot->getKills() >= 3) { // start test case to test for upgrading robot
+                //     gameInfo.upgradeRobot(robot, "TerminatorRoboCop");
+                //     robot->setKills(0);
+                // } end test case to test for upgrading robot
                 robot->look(0, 0);
                 robot->move();
                 robot->step();
@@ -88,6 +106,8 @@ int main() {
             }
         }
     }
+
+    cout << "\nGame Over!" << endl;
 
     return 0;
 }

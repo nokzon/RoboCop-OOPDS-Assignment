@@ -1,9 +1,5 @@
 M by N: 20 10
 Steps: 10
-Robots: 6
-MadBot Kidd 3 6
+Robots: 2
 RoboTank Jet 12 1
 Terminator Alpha 12 2
-BlueThunder Beta 15 9
-TerminatorRoboCop Charlie 3 4
-RoboCop Star random random

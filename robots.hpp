@@ -36,6 +36,9 @@ public:
     void reduceLives() { lives--; }
     void setPosY(int y) { posY = y; }
     void setPosX(int x) { posX = x; }
+    int getKills() { return kills; }
+    void setKills(int kills) { this->kills = kills; }
+    string getType() { return robotType; }
 
     void setGrid(Battlefield& battlefield) { this->battlefield = &battlefield; } 
     void setGameInfo(GameInfo& gameInfo) { this->gameInfo = &gameInfo; }
@@ -112,6 +115,7 @@ class Terminator : public MovingRobot, public SeeingRobot, public SteppingRobot{
         void fire(int x, int y) override;
         void fire() override;
         void printInfo() const override;
+        void robotUpgrade();
 };
 
 class TerminatorRoboCop : public MovingRobot, public SeeingRobot, public SteppingRobot, public ShootingRobot{

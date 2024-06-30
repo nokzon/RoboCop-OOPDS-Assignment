@@ -160,6 +160,7 @@ void GameInfo::waitingRobots(string& name){
 }
 
 // Upgrades robot when they get 3 kills
+// Upgrades robot when they get 3 kills
 void GameInfo::upgradeRobot(Robot* oldRobot, const string& newType) {
     Robot* newRobot = nullptr;
 
@@ -182,7 +183,25 @@ void GameInfo::upgradeRobot(Robot* oldRobot, const string& newType) {
         oldRobot->copyAttributesTo(newRobot);
         // Replace the old robot with the new robot in the vector
         replaceRobot(oldRobot, newRobot);
-    } else {
+
+        // Example of using new robot's functions after upgrade
+        if (TerminatorRoboCop* newTerminator = dynamic_cast<TerminatorRoboCop*>(newRobot)) {
+            newTerminator->move();
+        }
+        if (MadBot* newMadBot = dynamic_cast<MadBot*>(newRobot)) {
+            newMadBot->fire();
+        }
+        if (RoboTank* newRoboTank = dynamic_cast<RoboTank*>(newRobot)) {
+            newRoboTank->fire();
+        }
+        if (UltimateRobot* newUltimateRobot = dynamic_cast<UltimateRobot*>(newRobot)) {
+            newUltimateRobot->fire();
+        }
+        else {
+            cerr << "Error: Could not cast to the desired robot type." << endl;
+        }
+    }
+    else {
         cerr << "Error: Unknown robot type for upgrade." << endl;
     }
 }
@@ -193,7 +212,7 @@ void GameInfo::replaceRobot(Robot* oldRobot, Robot* newRobot) {
     if (it != robotVector.end()) {
         *it = newRobot;
     }
-    delete oldRobot;
+    // delete oldRobot;
 }
 
 // Function to print the contents of a gameInfo object

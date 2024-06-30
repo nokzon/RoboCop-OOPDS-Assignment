@@ -105,3 +105,17 @@ void Battlefield::printBattlefield() {
         std::cout << "\n";
     }
 }
+
+bool Battlefield::checkOneRobotAlive()
+{
+    int robotAlive = 0;
+    for (int i = 0; i < robots.size(); i++) {
+        if (robots[i]->getLives() > 0) {
+            robotAlive++;
+        }
+    }
+    if (robotAlive + 1 == gameInfo.getRobotCount()) {
+        return true;
+    }
+    return false;
+}

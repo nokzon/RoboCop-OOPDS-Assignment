@@ -278,6 +278,25 @@ void Terminator::printInfo() const
          << posY << ", " << posX << ")" << endl;
 }
 
+// void Terminator::robotUpgrade()
+// {
+//     string name = "Terminator";
+//     auto findRobotByName = [name](const pair<string, int>& p) {
+//         return p.first == name;
+//     };
+
+//     GameInfo gameInfo;
+//     auto it = find_if(gameInfo.robotVector.begin(), gameInfo.robotVector.end(), findRobotByName);
+
+//     if (it != gameInfo.robotVector.end()) {
+//         Robot* robotToUpgrade = gameInfo.robotVector[it];
+//         gameInfo.upgradeRobot(robotToUpgrade, "Terminator");
+//     }
+//     else {
+//         cerr << "Error: Robot " << name << " not found in robotLivesPair vector." << endl;
+//     }
+// }
+
 // ******************************************************************
 // TERMINATOR ROBOCOP
 // ******************************************************************
