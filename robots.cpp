@@ -665,3 +665,15 @@ void UltimateRobot::printInfo() const
     cout << "Type: " << robotType << ", Name: " << robotName << ", Position: ("
          << posY << ", " << posX << ")" << endl;
 }
+
+// ******************************************************************
+// COPYING ROBOT ATTRIBUTES
+// ******************************************************************
+void Robot::copyAttributesTo(Robot* other) const {
+    other->robotName = this->robotName;
+    other->posY = this->posY;
+    other->posX = this->posX;
+    other->lives = this->lives;
+    other->kills = this->kills;
+    other->alive = this->alive;
+}

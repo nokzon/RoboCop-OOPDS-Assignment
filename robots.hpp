@@ -37,8 +37,6 @@ public:
     void setPosY(int y) { posY = y; }
     void setPosX(int x) { posX = x; }
 
-    int getPosY() const { return posY; }  // Getter for posY
-    int getPosX() const { return posX; }  // Getter for posX
     void setGrid(Battlefield& battlefield) { this->battlefield = &battlefield; } 
     void setGameInfo(GameInfo& gameInfo) { this->gameInfo = &gameInfo; }
 
@@ -49,6 +47,12 @@ public:
     virtual void fire(int x, int y) = 0;
     virtual void fire() = 0;
     virtual void printInfo() const = 0;
+    void copyAttributesTo(Robot* other) const;
+
+    // Accessor methods
+    int getPosY() const { return posY; }  // Getter for posY
+    int getPosX() const { return posX; }  // Getter for posX
+    string getRobotName() const { return robotName; }
 };
 
 // movingRobot class inheriting robot base class

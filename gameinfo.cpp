@@ -124,8 +124,6 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
 void GameInfo::robotLives(Robot* robot){
     robotLivesPair.push_back(make_pair(robot->getName(), 3));
 }
-// TODO: After doing simulation loop make sure the name calling is correct. We might want to store the entire information of robots instead of just the name
-// everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.
 
 // Function to check if a robot exists and deduct its lives
 // void GameInfo::checkRobotLives(const string& name){
@@ -160,8 +158,43 @@ void GameInfo::printRobotStatus(){
 void GameInfo::waitingRobots(string& name){
     waitingStatusRobot.push_back(name);
 }
-// TODO: In simulation loop, check if robot's still alive, if so then only add it to this vector. Robots that are in this list will be respawned into the 
-// battlefield when it's their turn.
+
+// Upgrades robot when they get 3 kills
+void GameInfo::upgradeRobot(Robot* oldRobot, const string& newType) {
+    Robot* newRobot = nullptr;
+
+    // Create the new robot based on the new type
+    if (newType == "TerminatorRoboCop") {
+        newRobot = new TerminatorRoboCop("TerminatorRoboCop", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
+    }
+    if (newType == "MadBot") {
+        newRobot = new MadBot("MadBot", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
+    }
+    if (newType == "RoboTank") {
+        newRobot = new RoboTank("RoboTank", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
+    }
+    if (newType == "UltimateRobot") {
+        newRobot = new UltimateRobot("UltimateRobot", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
+    }
+
+    if (newRobot) {
+        // Copy attributes from old robot to new robot
+        oldRobot->copyAttributesTo(newRobot);
+        // Replace the old robot with the new robot in the vector
+        replaceRobot(oldRobot, newRobot);
+    } else {
+        cerr << "Error: Unknown robot type for upgrade." << endl;
+    }
+}
+
+// This replaces old robots with new ones
+void GameInfo::replaceRobot(Robot* oldRobot, Robot* newRobot) {
+    auto it = find(robotVector.begin(), robotVector.end(), oldRobot);
+    if (it != robotVector.end()) {
+        *it = newRobot;
+    }
+    delete oldRobot;
+}
 
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
