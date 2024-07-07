@@ -124,8 +124,6 @@ Robot* GameInfo::parseRobotInfo(const std::string& line, const GameInfo& gameInf
 void GameInfo::robotLives(Robot* robot){
     robotLivesPair.push_back(make_pair(robot->getName(), 3));
 }
-// TODO: After doing simulation loop make sure the name calling is correct. We might want to store the entire information of robots instead of just the name
-// everytime check if robot still has live, if not then use a destructor or something to delete the robot and remove them from this list.
 
 // Function to check if a robot exists and deduct its lives
 // void GameInfo::checkRobotLives(const string& name){
@@ -160,8 +158,6 @@ void GameInfo::printRobotStatus(){
 void GameInfo::waitingRobots(string& name){
     waitingStatusRobot.push_back(name);
 }
-// TODO: In simulation loop, check if robot's still alive, if so then only add it to this vector. Robots that are in this list will be respawned into the 
-// battlefield when it's their turn.
 
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {

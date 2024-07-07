@@ -35,6 +35,9 @@ public:
     void checkRobotLives(const string& name);
     void printRobotStatus();
     void waitingRobots(string& name);
+    void upgradeRobot(Robot* oldRobot, const string& newType);
+    void replaceRobot(Robot* oldRobot, Robot* newRobot);
+    int getRobotCount() { return robotCount; }
 };
 
 #endif // GAMEINFO_HPP
