@@ -1,0 +1,533 @@
+Initial battlefield: 
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  .  .  &  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  .  R  .  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  .  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  .  .  .  .  .  .  .  .  .
+ 12  .  t  T  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  .  .
+ 19  .  .  .  .  .  .  .  .  .  .
+
+
+Steps: 1
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  .  .  &  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  .  R  .  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  .  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  .  .  .  .  .  .  .  .  .
+ 12  .  t  T  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  .  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (4, 7)
+Jet does not look around
+Jet does not move around
+Jet fires at (8, 7)
+Jet fires at (17, 5)
+Jet fires at (11, 0)
+Alpha looks around its immediate neighbourhood.
+Robot Jet found at (12, 1)
+Alpha moves to (12, 1)
+Alpha steps on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (14, 9)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (2, 3)
+Charlie did not step on a robot
+Charlie fires at (3, 9)
+Charlie fires at (10, 2)
+Charlie fires at (4, 3)
+Star looks around its current position.
+Star moves to (6, 1)
+Star fires at an empty location.
+Star fires at (0, 1)
+Star fires at (8, 5)
+
+
+Steps: 2
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  &  .  .  .  .  .  .
+  3  .  .  .  .  .  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  R  .  .  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  .  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  .  .  .  .  .  .  .  .  .
+ 12  .  T  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  .  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (3, 7)
+Jet respawned at (3, 2)
+Jet does not look around
+Jet does not move around
+Jet fires at (4, 6)
+Jet fires at (12, 2)
+Jet fires at (13, 5)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (11, 2)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (14, 10)
+Charlie looks around its immediate neighbourhood.
+Robot Jet found at (3, 2)
+Charlie moves to (3, 2)
+Charlie steps on a robot
+Charlie fires at an empty location.
+Charlie fires at (4, 8)
+Charlie fires at (0, 6)
+Star looks around its current position.
+Star moves to (7, 1)
+Star fires at an empty location.
+Star fires at (0, 0)
+Star fires at an empty location.
+
+
+Steps: 3
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  &  .  .  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  .  .  .  .  .  .  .  .  .
+  7  .  R  .  .  .  .  .  .  .  .
+  8  .  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  .  T  .  .  .  .  .  .  .
+ 12  .  .  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  .  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (4, 6)
+Jet respawned at (18, 8)
+Jet does not look around
+Jet does not move around
+Jet fires at (2, 3)
+Jet fires at (8, 0)
+Jet fires at (3, 9)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (10, 1)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (15, 10)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (2, 1)
+Charlie did not step on a robot
+Charlie fires at an empty location.
+Charlie fires at (5, 4)
+Charlie fires at an empty location.
+Star looks around its current position.
+Star moves to (8, 1)
+Star fires at (12, 4)
+Star fires at (1, 0)
+Star fires at an empty location.
+
+
+Steps: 4
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  &  .  .  .  .  .  .  .  .
+  3  .  .  .  .  .  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  .  .  .  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  .  R  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  T  .  .  .  .  .  .  .  .
+ 11  .  .  .  .  .  .  .  .  .  .
+ 12  .  .  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  t  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (2, 7)
+Jet does not look around
+Jet does not move around
+Jet fires at (11, 3)
+Jet fires at (19, 8)
+Jet fires at (18, 2)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (10, 2)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (16, 10)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (3, 1)
+Charlie did not step on a robot
+Charlie fires at an empty location.
+Charlie fires at an empty location.
+Charlie fires at an empty location.
+Star looks around its current position.
+Star moves to (8, 0)
+Star fires at an empty location.
+Star fires at (9, 8)
+Star fires at (15, 3)
+
+
+Steps: 5
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  &  .  .  .  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  .  .  .  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  R  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  T  .  .  .  .  .  .  .
+ 11  .  .  .  .  .  .  .  .  .  .
+ 12  .  .  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  t  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (4, 7)
+Jet does not look around
+Jet does not move around
+Jet fires at (9, 2)
+Jet fires at (0, 6)
+Jet fires at (13, 0)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (11, 1)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (16, 9)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (4, 0)
+Charlie did not step on a robot
+Charlie fires at (5, 7)
+Charlie fires at an empty location.
+Charlie fires at (8, 2)
+Star looks around its current position.
+Star moves to (8, 1)
+Star fires at (7, 4)
+Star fires at (9, 1)
+Star fires at an empty location.
+
+
+Steps: 6
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  .  .  .  .  M  .  .  .
+  4  &  .  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  .  .  .  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  .  R  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  T  .  .  .  .  .  .  .  .
+ 12  .  .  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  t  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (3, 7)
+Jet does not look around
+Jet does not move around
+Jet fires at (15, 4)
+Jet fires at (16, 2)
+Jet fires at (7, 7)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (10, 0)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (16, 8)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (5, 0)
+Charlie did not step on a robot
+Charlie fires at an empty location.
+Charlie fires at (4, 1)
+Charlie fires at an empty location.
+Star looks around its current position.
+Star moves to (8, 2)
+Star fires at an empty location.
+Star fires at an empty location.
+Star fires at (1, 5)
+
+
+Steps: 7
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  .  .  .  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  &  .  .  .  .  .  .  .  .  .
+  6  .  .  .  .  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  .  .  R  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  T  .  .  .  .  .  .  .  .  .
+ 11  .  .  .  .  .  .  .  .  .  .
+ 12  .  .  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  t  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (2, 5)
+Jet does not look around
+Jet does not move around
+Jet fires at (12, 4)
+Jet fires at (13, 9)
+Jet fires at (6, 6)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (11, 1)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (15, 8)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (5, 1)
+Charlie did not step on a robot
+Charlie fires at an empty location.
+Charlie fires at an empty location.
+Charlie fires at (4, 6)
+Star looks around its current position.
+Star moves to (7, 2)
+Star fires at (8, 5)
+Star fires at an empty location.
+Star fires at (16, 3)
+
+
+Steps: 8
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  .  .  .  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  .  &  .  .  .  .  .  .  .  .
+  6  .  .  .  .  .  .  .  .  .  .
+  7  .  .  R  .  .  .  .  .  .  .
+  8  .  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  T  .  .  .  .  .  .  .  .
+ 12  .  .  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  t  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (3, 7)
+Jet does not look around
+Jet does not move around
+Jet fires at (13, 2)
+Jet fires at (19, 3)
+Jet fires at (10, 5)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (12, 2)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (14, 8)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (5, 0)
+Charlie did not step on a robot
+Charlie fires at (11, 4)
+Charlie fires at (4, 8)
+Charlie fires at (2, 3)
+Star looks around its current position.
+Star moves to (7, 3)
+Star fires at (7, 9)
+Star fires at an empty location.
+Star fires at (5, 9)
+
+
+Steps: 9
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  .  .  .  .  M  .  .  .
+  4  .  .  .  .  .  .  .  .  .  .
+  5  &  .  .  .  .  .  .  .  .  .
+  6  .  .  .  .  .  .  .  .  .  .
+  7  .  .  .  R  .  .  .  .  .  .
+  8  .  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  .  .  .  .  .  .  .  .  .
+ 12  .  .  T  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  t  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (3, 7)
+Jet does not look around
+Jet does not move around
+Jet fires at (14, 4)
+Jet fires at (16, 0)
+Jet fires at (17, 2)
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (11, 2)
+Alpha did not step on a robot
+Alpha does not fire
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (14, 9)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (4, 1)
+Charlie did not step on a robot
+Charlie fires at an empty location.
+Charlie fires at (8, 4)
+Charlie fires at (2, 4)
+Star looks around its current position.
+Star moves to (6, 3)
+Star fires at (13, 6)
+Star fires at (7, 8)
+Star fires at (7, 1)
+
+
+Steps: 10
+     0  1  2  3  4  5  6  7  8  9
+  0  .  .  .  .  .  .  .  .  .  .
+  1  .  .  .  .  .  .  .  .  .  .
+  2  .  .  .  .  .  .  .  .  .  .
+  3  .  .  .  .  .  .  M  .  .  .
+  4  .  &  .  .  .  .  .  .  .  .
+  5  .  .  .  .  .  .  .  .  .  .
+  6  .  .  .  R  .  .  .  .  .  .
+  7  .  .  .  .  .  .  .  .  .  .
+  8  .  .  .  .  .  .  .  .  .  .
+  9  .  .  .  .  .  .  .  .  .  .
+ 10  .  .  .  .  .  .  .  .  .  .
+ 11  .  .  T  .  .  .  .  .  .  .
+ 12  .  .  .  .  .  .  .  .  .  .
+ 13  .  .  .  .  .  .  .  .  .  .
+ 14  .  .  .  .  .  .  .  .  .  .
+ 15  .  .  .  .  .  .  .  .  .  B
+ 16  .  .  .  .  .  .  .  .  .  .
+ 17  .  .  .  .  .  .  .  .  .  .
+ 18  .  .  .  .  .  .  .  .  t  .
+ 19  .  .  .  .  .  .  .  .  .  .
+Kidd does not look around
+Kidd does not move around
+Kidd fires at (2, 5)
+Jet does not look around
+Jet does not move around
+Jet fires at (15, 9)
+Jet hit a robot
+Jet fires at (2, 2)
+Jet fires at (4, 1)
+Jet hit a robot
+Alpha looks around its immediate neighbourhood.
+Alpha moves to (12, 3)
+Alpha did not step on a robot
+Alpha does not fire
+Beta respawned at (5, 4)
+Beta does not look around
+Beta does not move around
+Beta fires at the next clockwise direction at (4, 5)
+Charlie respawned at (16, 6)
+Charlie looks around its immediate neighbourhood.
+Charlie moves to (15, 7)
+Charlie did not step on a robot
+Charlie fires at an empty location.
+Charlie fires at (15, 0)
+Charlie fires at (15, 9)
+Star looks around its current position.
+Robot Beta found at (5, 4)
+Star moves to (7, 3)
+Star fires at (9, 1)
+Star fires at (6, 1)
+Star fires at (6, 7)
+
+Game Over!

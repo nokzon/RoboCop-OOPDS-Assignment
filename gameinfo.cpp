@@ -159,62 +159,6 @@ void GameInfo::waitingRobots(string& name){
     waitingStatusRobot.push_back(name);
 }
 
-// Upgrades robot when they get 3 kills
-// Upgrades robot when they get 3 kills
-void GameInfo::upgradeRobot(Robot* oldRobot, const string& newType) {
-    Robot* newRobot = nullptr;
-
-    // Create the new robot based on the new type
-    if (newType == "TerminatorRoboCop") {
-        newRobot = new TerminatorRoboCop("TerminatorRoboCop", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
-    }
-    if (newType == "MadBot") {
-        newRobot = new MadBot("MadBot", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
-    }
-    if (newType == "RoboTank") {
-        newRobot = new RoboTank("RoboTank", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
-    }
-    if (newType == "UltimateRobot") {
-        newRobot = new UltimateRobot("UltimateRobot", oldRobot->getRobotName(), oldRobot->getPosY(), oldRobot->getPosX());
-    }
-
-    if (newRobot) {
-        // Copy attributes from old robot to new robot
-        oldRobot->copyAttributesTo(newRobot);
-        // Replace the old robot with the new robot in the vector
-        replaceRobot(oldRobot, newRobot);
-
-        // Example of using new robot's functions after upgrade
-        if (TerminatorRoboCop* newTerminator = dynamic_cast<TerminatorRoboCop*>(newRobot)) {
-            newTerminator->move();
-        }
-        if (MadBot* newMadBot = dynamic_cast<MadBot*>(newRobot)) {
-            newMadBot->fire();
-        }
-        if (RoboTank* newRoboTank = dynamic_cast<RoboTank*>(newRobot)) {
-            newRoboTank->fire();
-        }
-        if (UltimateRobot* newUltimateRobot = dynamic_cast<UltimateRobot*>(newRobot)) {
-            newUltimateRobot->fire();
-        }
-        else {
-            cerr << "Error: Could not cast to the desired robot type." << endl;
-        }
-    }
-    else {
-        cerr << "Error: Unknown robot type for upgrade." << endl;
-    }
-}
-
-// This replaces old robots with new ones
-void GameInfo::replaceRobot(Robot* oldRobot, Robot* newRobot) {
-    auto it = find(robotVector.begin(), robotVector.end(), oldRobot);
-    if (it != robotVector.end()) {
-        *it = newRobot;
-    }
-    // delete oldRobot;
-}
-
 // Function to print the contents of a gameInfo object
 void GameInfo::printGameInfo() {
     cout << "Grid Dimensions: " << this->M << " by " << this->N << endl;
