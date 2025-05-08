@@ -1,5 +1,5 @@
 # RoboCop-OOPDS-Assignment
-In this project, we are required to implement a "Robot War" simulator using standard C++. The simulator is a turn-based warfare simulation of robots on a 2D battlefield. Robots with different capabilities fight each other until one remains or the simulation time is up.
+In this project, we are required to implement a "Robot War" simulator with OOP concpets using standard C++. The simulator is a turn-based warfare simulation of robots on a 2D battlefield. Robots with different capabilities fight each other until one remains or the simulation time is up.
 
 
 
